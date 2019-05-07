@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="warehouse.controllers.MenuController"
+            prefHeight="30.0">
+    <MenuBar focusTraversable="true" GridPane.rowIndex="0" GridPane.columnIndex="0">
+        <menus>
+            <Menu text="Add">
+                <items>
+                    <MenuItem text="Author"/>
+                    <MenuItem text="Book"/>
+                    <MenuItem text="Genre"/>
+                </items>
+            </Menu>
+            <Menu text="Edit">
+                <items>
+                    <MenuItem text="Authors"/>
+                    <MenuItem text="Books"/>
+                    <MenuItem text="Genres"/>
+                </items>
+            </Menu>
+            <Menu text="Help">
+                <items>
+                    <MenuItem text="Help"/>
+                    <MenuItem text="About"/>
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+</AnchorPane>
