@@ -34,11 +34,7 @@ public class SQLiteClient {
             stmt = connection.createStatement();
             rs = stmt.executeQuery(SELECT_AUTHORS);
             while (rs.next()) {
-                Author author = new Author();
-                author.setId(rs.getInt(ID_FIELD));
-                author.setFirstName(rs.getString(FNAME_FIELD));
-                author.setFirstName(rs.getString(LNAME_FIELD));
-                authors.add(author);
+                authors.add(new Author(rs.getInt(ID_FIELD), rs.getString(FNAME_FIELD), rs.getString(LNAME_FIELD)));
             }
 
             //release resources
@@ -60,10 +56,7 @@ public class SQLiteClient {
             stmt = connection.createStatement();
             rs = stmt.executeQuery(SELECT_GENRES);
             while (rs.next()) {
-                Genre genre = new Genre();
-                genre.setId(rs.getInt(ID_FIELD));
-                genre.setName(rs.getString(NAME_FIELD));
-                genres.add(genre);
+                genres.add(new Genre(rs.getInt(ID_FIELD), rs.getString(NAME_FIELD)));
             }
 
             //release resources
@@ -93,17 +86,8 @@ public class SQLiteClient {
                 book.setDescription(rs.getString(DESCRIPTION_FIELD));
                 book.setPath(rs.getString(PATH_FIELD));
 
-                Author author = new Author();
-                author.setId(rs.getInt(ID_FIELD));
-                author.setFirstName(rs.getString(FNAME_FIELD));
-                author.setLastName(rs.getString(LNAME_FIELD));
-
-                Genre genre = new Genre();
-                genre.setId(rs.getInt(ID_FIELD));
-                genre.setName(rs.getString(GENRE_FIELD));
-
-                book.setAuthor(author);
-                book.setGenre(genre);
+                book.setAuthor(new Author(rs.getInt(ID_FIELD), rs.getString(FNAME_FIELD), rs.getString(LNAME_FIELD)));
+                book.setGenre(new Genre(rs.getInt(ID_FIELD), rs.getString(GENRE_FIELD)));
                 books.add(book);
             }
 

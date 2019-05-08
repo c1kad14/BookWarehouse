@@ -15,4 +15,6 @@ public class StringConstants {
     public static final String GENRE_FIELD = "Genre";
     public static final String DESCRIPTION_FIELD = "Description";
     public static final String PATH_FIELD = "Path";
+
+    public static final String SELECT_FILE_LABEL_TEXT = "No file selected";
 }

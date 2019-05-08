@@ -4,27 +4,33 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import warehouse.data.SQLiteClient;
 import warehouse.models.Book;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainController {
-
-    public ChoiceBox genresComboBox;
-    public ComboBox authorsComboBox;
+public class ListController {
     public TableView booksView;
     public ObservableList<String> genres;
     public ObservableList<String> authors;
+
+    public TableColumn titleColumn;
+    public TableColumn authorColumn;
+    public TableColumn genreColumn;
+    public TableColumn descColumn;
+    public TableColumn actionColumn;
+
     private SQLiteClient client;
-
-    public MainController() {
-
-    }
 
     @FXML
     public void initialize() {
@@ -36,24 +42,12 @@ public class MainController {
         client.getAuthors().forEach(a -> al.add(a.getFirstName()));
         genres = FXCollections.observableArrayList(gl);
         authors = FXCollections.observableArrayList(al);
-        genresComboBox.setItems(genres);
-        authorsComboBox.setItems(authors);
 
 
-        TableColumn<String, Book> column1 = new TableColumn<>("Author");
-        column1.setCellValueFactory(new PropertyValueFactory<>("Author"));
-
-        TableColumn<String, Book> column2 = new TableColumn<>("Title");
-        column2.setCellValueFactory(new PropertyValueFactory<>("Title"));
-
-        TableColumn<String, Book> column3 = new TableColumn<>("Genre");
-        column3.setCellValueFactory(new PropertyValueFactory<>("Genre"));
-
-        TableColumn<String, Book> column4 = new TableColumn<>("Description");
-        column4.setCellValueFactory(new PropertyValueFactory<>("Description"));
-
-        TableColumn<Book, Void> column5 = new TableColumn<>("Open");
-
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("Author"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        genreColumn.setCellValueFactory(new PropertyValueFactory<>("Genre"));
+        descColumn.setCellValueFactory(new PropertyValueFactory<>("Description"));
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> cellFactory = new Callback<TableColumn<Book, Void>, TableCell<Book, Void>>() {
             @Override
             public TableCell<Book, Void> call(final TableColumn<Book, Void> param) {
@@ -64,7 +58,13 @@ public class MainController {
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Book data = getTableView().getItems().get(getIndex());
-                            System.out.println("selectedData: " + data);
+
+                            try {
+                                Desktop.getDesktop().open(new File(data.getPath()));
+                            } catch (IOException e) {
+                                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                            }
+
                         });
                     }
 
@@ -82,8 +82,7 @@ public class MainController {
             }
         };
 
-        column5.setCellFactory(cellFactory);
-        booksView.getColumns().addAll(column1, column2, column3, column4, column5);
+        actionColumn.setCellFactory(cellFactory);
         booksView.setItems(FXCollections.observableArrayList(bl));
     }
 }
