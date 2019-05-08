@@ -81,13 +81,12 @@ public class SQLiteClient {
             rs = stmt.executeQuery(SELECT_BOOKS);
             while (rs.next()) {
                 Book book = new Book();
-                book.setId(rs.getInt(ID_FIELD));
+                book.setId(rs.getInt(ID_BOOK_FIELD));
                 book.setTitle(rs.getString(TITLE_FIELD));
                 book.setDescription(rs.getString(DESCRIPTION_FIELD));
                 book.setPath(rs.getString(PATH_FIELD));
-
-                book.setAuthor(new Author(rs.getInt(ID_FIELD), rs.getString(FNAME_FIELD), rs.getString(LNAME_FIELD)));
-                book.setGenre(new Genre(rs.getInt(ID_FIELD), rs.getString(GENRE_FIELD)));
+                book.setAuthor(new Author(rs.getInt(ID_AUTHOR_FIELD), rs.getString(FNAME_FIELD), rs.getString(LNAME_FIELD)));
+                book.setGenre(new Genre(rs.getInt(ID_GENRE_FIELD), rs.getString(GENRE_FIELD)));
                 books.add(book);
             }
 
@@ -112,7 +111,6 @@ public class SQLiteClient {
 
             //release resources
             stmt.close();
-            connection.commit();
             connection.close();
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -131,7 +129,6 @@ public class SQLiteClient {
 
             //release resources
             stmt.close();
-            connection.commit();
             connection.close();
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -151,7 +148,6 @@ public class SQLiteClient {
 
             //release resources
             stmt.close();
-            connection.commit();
             connection.close();
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

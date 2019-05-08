@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListController {
+public class ListController implements BookListener {
     public TableView booksView;
     public ObservableList<String> genres;
     public ObservableList<String> authors;
@@ -48,7 +48,12 @@ public class ListController {
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
         genreColumn.setCellValueFactory(new PropertyValueFactory<>("Genre"));
         descColumn.setCellValueFactory(new PropertyValueFactory<>("Description"));
-        Callback<TableColumn<Book, Void>, TableCell<Book, Void>> cellFactory = new Callback<TableColumn<Book, Void>, TableCell<Book, Void>>() {
+        actionColumn.setCellFactory(initActionButton());
+        booksView.setItems(FXCollections.observableArrayList(bl));
+    }
+
+    private Callback<TableColumn<Book, Void>, TableCell<Book, Void>> initActionButton() {
+         return new Callback<TableColumn<Book, Void>, TableCell<Book, Void>>() {
             @Override
             public TableCell<Book, Void> call(final TableColumn<Book, Void> param) {
                 final TableCell<Book, Void> cell = new TableCell<Book, Void>() {
@@ -82,7 +87,11 @@ public class ListController {
             }
         };
 
-        actionColumn.setCellFactory(cellFactory);
-        booksView.setItems(FXCollections.observableArrayList(bl));
+    }
+
+    @Override
+    public void bookListChanged() {
+        System.out.println("BOOK LISTENER CALLED");
+        initialize();
     }
 }

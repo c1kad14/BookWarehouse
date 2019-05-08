@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import warehouse.controllers.DialogController;
+import warehouse.controllers.ListController;
+import warehouse.controllers.SearchController;
 
 public class Main extends Application {
 
@@ -13,8 +16,18 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         GridPane root = new GridPane();
         Parent menu = FXMLLoader.load(getClass().getResource("ui/menu.fxml"));
-        Parent search = FXMLLoader.load(getClass().getResource("ui/search.fxml"));
-        Parent list = FXMLLoader.load(getClass().getResource("ui/list.fxml"));
+
+
+        FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("ui/search.fxml"));
+        Parent search = searchLoader.load();
+        SearchController searchController = searchLoader.getController();
+
+        FXMLLoader listLoader = new FXMLLoader(getClass().getResource("ui/list.fxml"));
+        Parent list = listLoader.load();
+        ListController listController = listLoader.getController();
+
+
+        searchController.setListController(listController);
 
         root.add(menu, 0, 0);
         root.add(search, 0, 1, 5, 2);

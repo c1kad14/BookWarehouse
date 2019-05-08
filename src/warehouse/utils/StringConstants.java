@@ -8,6 +8,9 @@ public class StringConstants {
     public static final String SQLITE_JDBC_DB = "jdbc:sqlite:BookLibrary.db";
 
     public static final String ID_FIELD = "Id";
+    public static final String ID_BOOK_FIELD = "IdBook";
+    public static final String ID_AUTHOR_FIELD = "IdAuthor";
+    public static final String ID_GENRE_FIELD = "IdGenre";
     public static final String FNAME_FIELD = "FirstName";
     public static final String LNAME_FIELD = "LastName";
     public static final String NAME_FIELD = "Name";
