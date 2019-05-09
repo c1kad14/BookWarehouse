@@ -156,4 +156,35 @@ public class SQLiteClient {
 
         return book;
     }
+
+    public List<Book> searchBooks(String searchValue) {
+        ResultSet rs;
+        List<Book> books = new ArrayList<>();
+        try {
+            //connect and create statement
+            connection = DriverManager.getConnection(SQLITE_JDBC_DB);
+            stmt = connection.createStatement();
+            rs = stmt.executeQuery(String.format(SELECT_BOOKS_FOR_SEARCH, searchValue));
+            while (rs.next()) {
+                Book book = new Book();
+                book.setId(rs.getInt(ID_BOOK_FIELD));
+                book.setTitle(rs.getString(TITLE_FIELD));
+                book.setDescription(rs.getString(DESCRIPTION_FIELD));
+                book.setPath(rs.getString(PATH_FIELD));
+                book.setAuthor(new Author(rs.getInt(ID_AUTHOR_FIELD), rs.getString(FNAME_FIELD), rs.getString(LNAME_FIELD)));
+                book.setGenre(new Genre(rs.getInt(ID_GENRE_FIELD), rs.getString(GENRE_FIELD)));
+                books.add(book);
+            }
+
+            //release resources
+            stmt.close();
+            rs.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            return null;
+        }
+
+        return books;
+    }
 }

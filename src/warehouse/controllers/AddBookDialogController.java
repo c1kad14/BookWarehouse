@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import warehouse.data.SQLiteClient;
@@ -19,6 +20,8 @@ import static warehouse.utils.StringConstants.SELECT_FILE_LABEL_TEXT;
 
 public class AddBookDialogController {
 
+    @FXML
+    public AnchorPane pane;
     public Button cancelBtn;
     public TextField titleTextBox;
     public ComboBox genresComboBox;
@@ -35,6 +38,8 @@ public class AddBookDialogController {
 
     @FXML
     public void initialize() {
+
+
         client = new SQLiteClient();
         selectedFileLabel.setText(SELECT_FILE_LABEL_TEXT);
 
@@ -42,6 +47,7 @@ public class AddBookDialogController {
         authors = client.getAuthors();
 
         fileChooser = new FileChooser();
+
         genresComboBox.setItems(FXCollections.observableArrayList(genres));
         authorsComboBox.setItems(FXCollections.observableArrayList(authors));
 
@@ -51,7 +57,7 @@ public class AddBookDialogController {
 
 
     public void cancelBtnClick(ActionEvent actionEvent) {
-        ((Stage) cancelBtn.getScene().getWindow()).close();
+        close();
     }
 
     public void selectFileBtnClick(ActionEvent actionEvent) {
@@ -73,12 +79,10 @@ public class AddBookDialogController {
 
         Optional<Author> author = authors.stream().filter(a -> a.toString().equals(authorsComboBox.getSelectionModel().getSelectedItem().toString())).findFirst();
         book.setAuthor(author.get());
-
         book.setPath(selectedPath);
 
         client.addBook(book);
-
-        ((Stage) addBtn.getScene().getWindow()).close();
+        close();
     }
 
     private void shouldAddButtonBeEnabled() {
@@ -96,5 +100,9 @@ public class AddBookDialogController {
         authorsComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> shouldAddButtonBeEnabled());
 
         titleTextBox.textProperty().addListener((observable, oldValue, newValue) -> shouldAddButtonBeEnabled());
+    }
+
+    private void close() {
+        ((Stage) cancelBtn.getScene().getWindow()).close();
     }
 }

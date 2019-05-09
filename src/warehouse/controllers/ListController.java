@@ -54,12 +54,12 @@ public class ListController implements BookListener {
     }
 
     private Callback<TableColumn<Book, Void>, TableCell<Book, Void>> initActionButton() {
-         return new Callback<TableColumn<Book, Void>, TableCell<Book, Void>>() {
+        return new Callback<TableColumn<Book, Void>, TableCell<Book, Void>>() {
             @Override
             public TableCell<Book, Void> call(final TableColumn<Book, Void> param) {
                 final TableCell<Book, Void> cell = new TableCell<Book, Void>() {
 
-                    private final Button btn = new Button("Action");
+                    private final Button btn = new Button("Open");
 
                     {
                         btn.setOnAction((ActionEvent event) -> {
@@ -91,8 +91,12 @@ public class ListController implements BookListener {
     }
 
     @Override
+    public void bookListChanged(List<Book> books) {
+        booksView.setItems(FXCollections.observableArrayList(books));
+    }
+
+    @Override
     public void bookListChanged() {
-        System.out.println("BOOK LISTENER CALLED");
-        initialize();
+        booksView.setItems(FXCollections.observableArrayList(client.getBooks()));
     }
 }

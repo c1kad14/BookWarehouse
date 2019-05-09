@@ -6,19 +6,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import warehouse.data.SQLiteClient;
 
 import java.io.IOException;
 
 public class SearchController {
-    public Button searchBtn;
     public Button filterBtn;
     public Button addBtn;
+    public TextField searchTextBox;
     private ListController listController;
+    private SQLiteClient client;
 
     @FXML
     public void initialize() {
+        client = new SQLiteClient();
+        addListeners();
     }
 
     @FXML
@@ -34,11 +39,6 @@ public class SearchController {
         listController.bookListChanged();
     }
 
-    public void searchBtnClick(ActionEvent actionEvent) {
-
-
-    }
-
     public void filterBtnClick(ActionEvent actionEvent) {
 
     }
@@ -46,4 +46,10 @@ public class SearchController {
     public void setListController(ListController listController) {
         this.listController = listController;
     }
+
+    private void addListeners() {
+        searchTextBox.textProperty().addListener((observable, oldValue, newValue) ->
+                listController.bookListChanged(client.searchBooks(searchTextBox.getText())));
+    }
+
 }

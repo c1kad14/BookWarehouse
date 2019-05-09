@@ -20,6 +20,7 @@ public class MenuController {
     public MenuItem editGenresMenuItem;
     public MenuItem helpMenuItem;
     public MenuItem aboutMenuItem;
+    private ListController listController;
 
     @FXML
     public void initialize() {
@@ -56,6 +57,8 @@ public class MenuController {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.showAndWait();
+
+        listController.bookListChanged();
     }
 
     public void addGenreMenuItemClick(ActionEvent actionEvent) {
@@ -72,5 +75,9 @@ public class MenuController {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.showAndWait();
+    }
+
+    public void setListController(ListController listController) {
+        this.listController = listController;
     }
 }
