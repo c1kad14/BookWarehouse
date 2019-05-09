@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import warehouse.controllers.DialogController;
 import warehouse.controllers.ListController;
 import warehouse.controllers.SearchController;
 

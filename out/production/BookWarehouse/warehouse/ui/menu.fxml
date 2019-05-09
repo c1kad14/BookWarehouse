@@ -14,22 +14,22 @@
         <menus>
             <Menu text="Add">
                 <items>
-                    <MenuItem text="Author"/>
-                    <MenuItem text="Book"/>
-                    <MenuItem text="Genre"/>
+                    <MenuItem fx:id="addAuthorMenuItem" text="Author" onAction="#addAuthorMenuItemClick"/>
+                    <MenuItem fx:id="addBookMenuItem" text="Book" onAction="#addBookMenuItemClick"/>
+                    <MenuItem fx:id="addGenreMenuItem" text="Genre" onAction="#addGenreMenuItemClick"/>
                 </items>
             </Menu>
             <Menu text="Edit">
                 <items>
-                    <MenuItem text="Authors"/>
-                    <MenuItem text="Books"/>
-                    <MenuItem text="Genres"/>
+                    <MenuItem fx:id="editAuthorsMenuItem" text="Authors"/>
+                    <MenuItem fx:id="editBooksMenuItem" text="Books"/>
+                    <MenuItem fx:id="editGenresMenuItem" text="Genres"/>
                 </items>
             </Menu>
             <Menu text="Help">
                 <items>
-                    <MenuItem text="Help"/>
-                    <MenuItem text="About"/>
+                    <MenuItem fx:id="helpMenuItem" text="Help"/>
+                    <MenuItem fx:id="aboutMenuItem" text="About"/>
                 </items>
             </Menu>
         </menus>

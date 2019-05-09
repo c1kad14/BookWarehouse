@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.AddAuthorDialogController">
+   <children>
+      <Label layoutX="43.0" layoutY="52.0" text="First Name:" />
+      <Label layoutX="44.0" layoutY="101.0" text="Last Name:" />
+      <TextField layoutX="137.0" layoutY="47.0" prefHeight="31.0" prefWidth="228.0" />
+      <TextField layoutX="137.0" layoutY="96.0" prefHeight="31.0" prefWidth="228.0" />
+      <Button layoutX="208.0" layoutY="154.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="64.0" text="Save" />
+      <Button layoutX="300.0" layoutY="154.0" mnemonicParsing="false" text="Cancel" />
+   </children>
+</AnchorPane>

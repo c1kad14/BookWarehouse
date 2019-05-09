@@ -17,7 +17,7 @@ import java.util.Optional;
 
 import static warehouse.utils.StringConstants.SELECT_FILE_LABEL_TEXT;
 
-public class DialogController {
+public class AddBookDialogController {
 
     public Button cancelBtn;
     public TextField titleTextBox;

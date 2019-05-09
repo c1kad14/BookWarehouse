@@ -10,7 +10,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class SearchController {
     public Button searchBtn;
@@ -24,7 +23,7 @@ public class SearchController {
 
     @FXML
     public void addBtnClick(ActionEvent event) throws IOException {
-        Parent dialog = FXMLLoader.load(getClass().getResource("../ui/dialog.fxml"));
+        Parent dialog = FXMLLoader.load(getClass().getResource("../ui/addBookDialog.fxml"));
         Scene scene = new Scene(dialog, 400, 400);
         Stage stage = new Stage();
         stage.setTitle("Add new book");
