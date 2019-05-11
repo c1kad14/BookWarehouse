@@ -39,8 +39,15 @@ public class SearchController {
         listController.bookListChanged();
     }
 
-    public void filterBtnClick(ActionEvent actionEvent) {
-
+    public void filterBtnClick(ActionEvent actionEvent) throws IOException {
+        Parent dialog = FXMLLoader.load(getClass().getResource("../ui/filterDialog.fxml"));
+        Scene scene = new Scene(dialog, 450, 400);
+        Stage stage = new Stage();
+        stage.setTitle("Apply filters");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     public void setListController(ListController listController) {

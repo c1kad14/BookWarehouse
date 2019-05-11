@@ -12,18 +12,19 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import warehouse.data.SQLiteClient;
 import warehouse.interfaces.BookListener;
+import warehouse.models.Author;
 import warehouse.models.Book;
+import warehouse.models.Genre;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListController implements BookListener {
     public TableView booksView;
-    public ObservableList<String> genres;
-    public ObservableList<String> authors;
+    public ObservableList<Genre> genres;
+    public ObservableList<Author> authors;
 
     public TableColumn titleColumn;
     public TableColumn authorColumn;
@@ -36,14 +37,10 @@ public class ListController implements BookListener {
     @FXML
     public void initialize() {
         client = new SQLiteClient();
-        ArrayList<String> gl = new ArrayList<>();
-        ArrayList<String> al = new ArrayList<>();
         List<Book> bl = client.getBooks();
-        client.getGenres().forEach(g -> gl.add(g.getName()));
-        client.getAuthors().forEach(a -> al.add(a.getFirstName()));
-        genres = FXCollections.observableArrayList(gl);
-        authors = FXCollections.observableArrayList(al);
 
+        genres = FXCollections.observableArrayList(client.getGenres());
+        authors = FXCollections.observableArrayList(client.getAuthors());
 
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("Author"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));

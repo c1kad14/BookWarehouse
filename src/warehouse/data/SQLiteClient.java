@@ -164,7 +164,7 @@ public class SQLiteClient {
             //connect and create statement
             connection = DriverManager.getConnection(SQLITE_JDBC_DB);
             stmt = connection.createStatement();
-            rs = stmt.executeQuery(String.format(SELECT_BOOKS_FOR_SEARCH, searchValue));
+            rs = stmt.executeQuery(String.format(SELECT_BOOKS_FOR_SEARCH, searchValue, searchValue, searchValue));
             while (rs.next()) {
                 Book book = new Book();
                 book.setId(rs.getInt(ID_BOOK_FIELD));

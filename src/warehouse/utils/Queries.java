@@ -12,7 +12,7 @@ public class Queries {
     public static String SELECT_BOOKS_FOR_SEARCH = "SELECT Books.Id as IdBook, Books.Title, Books.Description, Books.Path, " +
             "Authors.Id as IdAuthor, Authors.FirstName, Authors.LastName, Genres.Id as IdGenre, " +
             "Genres.Name AS Genre FROM Books INNER JOIN Authors ON Books.AuthorId = Authors.Id "
-            + "INNER JOIN Genres ON Books.GenreId = Genres.Id WHERE Books.Title LIKE '%%%s%%'";
+            + "INNER JOIN Genres ON Books.GenreId = Genres.Id WHERE Books.Title LIKE '%%%s%%' OR Authors.FirstName LIKE '%%%s%%' OR Authors.LastName LIKE '%%%s%%'";
 
     public static final String SELECT_AUTHORS = "SELECT * FROM Authors;";
     public static final String SELECT_GENRES = "SELECT * FROM Genres;";
