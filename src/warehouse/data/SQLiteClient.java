@@ -1,5 +1,6 @@
 package warehouse.data;
 
+import com.sun.org.apache.xpath.internal.operations.And;
 import warehouse.models.Author;
 import warehouse.models.Book;
 import warehouse.models.Genre;
@@ -71,14 +72,60 @@ public class SQLiteClient {
         return genres;
     }
 
-    public List<Book> getBooks() {
+    public List<Book> getBooks(String searchValue, List<Genre> genres, List<Author> authors) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(SELECT_BOOKS);
+
+        if (genres.size() > 0 || authors.size() > 0 || !searchValue.isEmpty()) {
+            stringBuilder.append(WHERE_CLAUSE);
+
+            if (!searchValue.isEmpty()) {
+                stringBuilder.append("(");
+                stringBuilder.append(String.format(SEARCH_CLAUSE, searchValue, searchValue, searchValue));
+                stringBuilder.append(")");
+            }
+
+            if (genres.size() > 0 || authors.size() > 0) {
+                if (!searchValue.isEmpty()) {
+                    stringBuilder.append(AND_CLAUSE);
+                }
+                stringBuilder.append("(");
+
+                for (int i = 0; i < genres.size(); i++) {
+                    stringBuilder.append(String.format(GENRES_ID_CLAUSE, genres.get(i).getId()));
+
+                    if (i != genres.size() - 1) {
+                        stringBuilder.append(OR_CLAUSE);
+                    }
+                }
+
+                if (genres.size() > 0 && authors.size() > 0) {
+                    stringBuilder.append(")");
+                    stringBuilder.append(AND_CLAUSE);
+                    stringBuilder.append("(");
+                }
+
+                for (int i = 0; i < authors.size(); i++) {
+                    stringBuilder.append(String.format(AUTHOR_ID_CLAUSE, authors.get(i).getId()));
+
+                    if (i != authors.size() - 1) {
+                        stringBuilder.append(OR_CLAUSE);
+                    }
+                }
+                stringBuilder.append(")");
+            }
+
+        }
+
         ResultSet rs;
         List<Book> books = new ArrayList<>();
         try {
             //connect and create statement
             connection = DriverManager.getConnection(SQLITE_JDBC_DB);
             stmt = connection.createStatement();
-            rs = stmt.executeQuery(SELECT_BOOKS);
+            System.out.println(stringBuilder.toString());
+            rs = stmt.executeQuery(stringBuilder.toString());
             while (rs.next()) {
                 Book book = new Book();
                 book.setId(rs.getInt(ID_BOOK_FIELD));
@@ -100,6 +147,7 @@ public class SQLiteClient {
         }
 
         return books;
+
     }
 
     public Author addAuthor(Author author) {
@@ -186,5 +234,76 @@ public class SQLiteClient {
         }
 
         return books;
+    }
+
+    public List<Book> filterBooks(String searchValue, List<Genre> genres, List<Author> authors) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(SELECT_BOOKS);
+
+        if (genres.size() > 0 || authors.size() > 0 || !searchValue.isEmpty()) {
+            stringBuilder.append(WHERE_CLAUSE);
+
+            stringBuilder.append("(");
+
+            for (int i = 0; i < genres.size(); i++) {
+                stringBuilder.append(String.format(GENRES_ID_CLAUSE, genres.get(i).getId()));
+
+                if (i != genres.size() - 1) {
+                    stringBuilder.append(OR_CLAUSE);
+                }
+            }
+
+            if (genres.size() > 0 && authors.size() > 0) {
+                stringBuilder.append(")");
+                stringBuilder.append(AND_CLAUSE);
+                stringBuilder.append("(");
+            }
+
+            for (int i = 0; i < authors.size(); i++) {
+                stringBuilder.append(String.format(AUTHOR_ID_CLAUSE, authors.get(i).getId()));
+
+                if (i != authors.size() - 1) {
+                    stringBuilder.append(OR_CLAUSE);
+                }
+            }
+            stringBuilder.append(")");
+        }
+
+        if (!searchValue.isEmpty()) {
+            stringBuilder.append(AND_CLAUSE);
+            stringBuilder.append(SEARCH_CLAUSE);
+        }
+
+        ResultSet rs;
+        List<Book> books = new ArrayList<>();
+        try {
+            //connect and create statement
+            connection = DriverManager.getConnection(SQLITE_JDBC_DB);
+            stmt = connection.createStatement();
+            System.out.println(String.format(stringBuilder.toString(), genres.stream().mapToInt(g -> g.getId()), authors.stream().mapToInt(a -> a.getId()), searchValue, searchValue, searchValue));
+            rs = stmt.executeQuery(String.format(stringBuilder.toString(), genres.stream().mapToInt(g -> g.getId()), authors.stream().mapToInt(a -> a.getId())));
+            while (rs.next()) {
+                Book book = new Book();
+                book.setId(rs.getInt(ID_BOOK_FIELD));
+                book.setTitle(rs.getString(TITLE_FIELD));
+                book.setDescription(rs.getString(DESCRIPTION_FIELD));
+                book.setPath(rs.getString(PATH_FIELD));
+                book.setAuthor(new Author(rs.getInt(ID_AUTHOR_FIELD), rs.getString(FNAME_FIELD), rs.getString(LNAME_FIELD)));
+                book.setGenre(new Genre(rs.getInt(ID_GENRE_FIELD), rs.getString(GENRE_FIELD)));
+                books.add(book);
+            }
+
+            //release resources
+            stmt.close();
+            rs.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            return null;
+        }
+
+        return books;
+
     }
 }

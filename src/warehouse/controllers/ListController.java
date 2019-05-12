@@ -19,6 +19,7 @@ import warehouse.models.Genre;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListController implements BookListener {
@@ -37,7 +38,7 @@ public class ListController implements BookListener {
     @FXML
     public void initialize() {
         client = new SQLiteClient();
-        List<Book> bl = client.getBooks();
+        List<Book> bl = client.getBooks("", new ArrayList<>(), new ArrayList<>());
 
         genres = FXCollections.observableArrayList(client.getGenres());
         authors = FXCollections.observableArrayList(client.getAuthors());
@@ -94,6 +95,11 @@ public class ListController implements BookListener {
 
     @Override
     public void bookListChanged() {
-        booksView.setItems(FXCollections.observableArrayList(client.getBooks()));
+        booksView.setItems(FXCollections.observableArrayList(client.getBooks("", new ArrayList<>(), new ArrayList<>())));
+    }
+
+    @Override
+    public void bookListChanged(List<Genre> genres, List<Author> authors) {
+       // booksView.setItems(FXCollections.observableArrayList(client.getBooks(genres, authors)));
     }
 }

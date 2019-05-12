@@ -10,19 +10,28 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import warehouse.data.SQLiteClient;
+import warehouse.interfaces.FilterListener;
+import warehouse.models.Author;
+import warehouse.models.Genre;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SearchController {
+public class SearchController implements FilterListener {
     public Button filterBtn;
     public Button addBtn;
     public TextField searchTextBox;
     private ListController listController;
     private SQLiteClient client;
+    private List<Genre> selectedGenres;
+    private List<Author> selectedAuthors;
 
     @FXML
     public void initialize() {
         client = new SQLiteClient();
+        selectedGenres = new ArrayList<>();
+        selectedAuthors = new ArrayList<>();
         addListeners();
     }
 
@@ -40,9 +49,15 @@ public class SearchController {
     }
 
     public void filterBtnClick(ActionEvent actionEvent) throws IOException {
-        Parent dialog = FXMLLoader.load(getClass().getResource("../ui/filterDialog.fxml"));
-        Scene scene = new Scene(dialog, 450, 400);
+        FXMLLoader filterLoader = new FXMLLoader(getClass().getResource("../ui/filterDialog.fxml"));
+        Parent filterDialog = filterLoader.load();
+        FilterDialogController filterDialogController = filterLoader.getController();
+
+        filterDialogController.init(this);
+
+        Scene scene = new Scene(filterDialog, 450, 350);
         Stage stage = new Stage();
+
         stage.setTitle("Apply filters");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
@@ -54,9 +69,25 @@ public class SearchController {
         this.listController = listController;
     }
 
-    private void addListeners() {
-        searchTextBox.textProperty().addListener((observable, oldValue, newValue) ->
-                listController.bookListChanged(client.searchBooks(searchTextBox.getText())));
+    @Override
+    public void filterSelectionChanged(List<Genre> selectedGenres, List<Author> selectedAuthors) {
+        this.selectedGenres = selectedGenres;
+        this.selectedAuthors = selectedAuthors;
+        if(this.selectedGenres.size() > 0 || this.selectedAuthors.size() > 0) {
+            listController.bookListChanged(client.getBooks(searchTextBox.getText(), this.selectedGenres, this.selectedAuthors));
+        }
     }
 
+    public List<Genre> getSelectedGenres(){
+        return this.selectedGenres;
+    }
+
+    public List<Author> getSelectedAuthors() {
+        return this.selectedAuthors;
+    }
+
+    private void addListeners() {
+        searchTextBox.textProperty().addListener((observable, oldValue, newValue) ->
+                listController.bookListChanged(client.getBooks(searchTextBox.getText(), this.selectedGenres, this.selectedAuthors)));
+    }
 }

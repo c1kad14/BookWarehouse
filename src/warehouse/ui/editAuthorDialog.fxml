@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="247.0" prefWidth="331.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.EditGenreDialog">
+   <children>
+      <Button layoutX="229.0" layoutY="169.0" mnemonicParsing="false" text="Close" />
+      <Button layoutX="157.0" layoutY="169.0" mnemonicParsing="false" text="Save" />
+      <Label layoutX="42.0" layoutY="68.0" text="Id: " />
+      <TextField layoutX="98.0" layoutY="110.0" />
+      <Label layoutX="42.0" layoutY="115.0" prefHeight="21.0" prefWidth="56.0" text="Genre: " />
+      <TextField disable="true" layoutX="98.0" layoutY="63.0" />
+   </children>
+</AnchorPane>
