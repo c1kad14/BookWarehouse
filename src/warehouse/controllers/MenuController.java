@@ -6,10 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 public class MenuController {
     public MenuItem addAuthorMenuItem;
@@ -26,7 +29,7 @@ public class MenuController {
         this.listController = listController;
     }
 
-    public void addAuthorMenuItemClick(ActionEvent actionEvent) {
+    public void addAuthorMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
             dialog = FXMLLoader.load(getClass().getResource("../ui/addAuthorDialog.fxml"));
@@ -38,11 +41,12 @@ public class MenuController {
         stage.setTitle("Add new author");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
+        stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
         stage.setScene(scene);
         stage.showAndWait();
     }
 
-    public void addBookMenuItemClick(ActionEvent actionEvent) {
+    public void addBookMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
             dialog = FXMLLoader.load(getClass().getResource("../ui/addBookDialog.fxml"));
@@ -54,13 +58,14 @@ public class MenuController {
         stage.setTitle("Add new book");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
+        stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
         stage.setScene(scene);
         stage.showAndWait();
 
         listController.bookListChanged();
     }
 
-    public void addGenreMenuItemClick(ActionEvent actionEvent) {
+    public void addGenreMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
             dialog = FXMLLoader.load(getClass().getResource("../ui/addGenreDialog.fxml"));
@@ -72,11 +77,12 @@ public class MenuController {
         stage.setTitle("Add new genre");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
+        stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
         stage.setScene(scene);
         stage.showAndWait();
     }
 
-    public void editAuthorsMenuItemClick(ActionEvent actionEvent) {
+    public void editAuthorsMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
             dialog = FXMLLoader.load(getClass().getResource("../ui/editAuthorsListDialog.fxml"));
@@ -88,6 +94,7 @@ public class MenuController {
         stage.setTitle("Edit Authors");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
+        stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
         stage.setScene(scene);
         stage.showAndWait();
 
@@ -95,7 +102,7 @@ public class MenuController {
         listController.bookListChanged();
     }
 
-    public void editGenresMenuItemClick(ActionEvent actionEvent) {
+    public void editGenresMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
             dialog = FXMLLoader.load(getClass().getResource("../ui/editGenresListDialog.fxml"));
@@ -107,6 +114,7 @@ public class MenuController {
         stage.setTitle("Edit Genres");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
+        stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
         stage.setScene(scene);
         stage.showAndWait();
 
@@ -114,7 +122,7 @@ public class MenuController {
         listController.bookListChanged();
     }
 
-    public void editBooksMenuItemClick(ActionEvent actionEvent) {
+    public void editBooksMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
             dialog = FXMLLoader.load(getClass().getResource("../ui/editBooksListDialog.fxml"));
@@ -126,9 +134,27 @@ public class MenuController {
         stage.setTitle("Edit Books");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
+        stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
         stage.setScene(scene);
         stage.showAndWait();
 
         listController.bookListChanged();
+    }
+
+    public void aboutMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
+        Parent dialog = null;
+        try {
+            dialog = FXMLLoader.load(getClass().getResource("../ui/about.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(dialog, 298, 310);
+        Stage stage = new Stage();
+        stage.setTitle("About Book Warehouse");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 }

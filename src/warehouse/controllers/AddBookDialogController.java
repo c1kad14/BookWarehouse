@@ -16,7 +16,6 @@ import warehouse.models.Genre;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import static warehouse.utils.StringConstants.BOOK_WAREHOUSE_FOLDER;
 import static warehouse.utils.StringConstants.SELECT_FILE_LABEL_TEXT;

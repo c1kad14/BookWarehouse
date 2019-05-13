@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import warehouse.data.SQLiteClient;
@@ -14,6 +15,7 @@ import warehouse.interfaces.FilterListener;
 import warehouse.models.Author;
 import warehouse.models.Genre;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,7 @@ public class SearchController implements FilterListener {
         stage.setTitle("Add new book");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
+        stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
         stage.setScene(scene);
         stage.showAndWait();
         listController.bookListChanged();
@@ -61,6 +64,7 @@ public class SearchController implements FilterListener {
         stage.setTitle("Apply filters");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
+        stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
         stage.setScene(scene);
         stage.showAndWait();
     }

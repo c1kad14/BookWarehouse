@@ -12,13 +12,16 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import warehouse.data.SQLiteClient;
 import warehouse.models.Author;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import static warehouse.utils.StringConstants.*;
 
@@ -64,7 +67,12 @@ public class EditAuthorsListDialogController {
                             Author author = getTableView().getItems().get(getIndex());
 
                             //Call edit dialog open
-                            boolean result = client.deleteAuthor(author);
+                            boolean result = false;
+                            try {
+                                result = client.deleteAuthor(author);
+                            } catch (MalformedURLException e) {
+                                e.printStackTrace();
+                            }
                             System.out.println(result);
 
                             authorList = FXCollections.observableArrayList(client.getAuthors());
@@ -116,6 +124,11 @@ public class EditAuthorsListDialogController {
                             stage.setTitle("Edit author");
                             stage.initModality(Modality.APPLICATION_MODAL);
                             stage.setResizable(false);
+                            try {
+                                stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
+                            } catch (MalformedURLException e) {
+                                e.printStackTrace();
+                            }
                             stage.setScene(scene);
                             stage.showAndWait();
 

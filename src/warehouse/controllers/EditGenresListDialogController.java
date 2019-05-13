@@ -12,13 +12,16 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import warehouse.data.SQLiteClient;
 import warehouse.models.Genre;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import static warehouse.utils.StringConstants.*;
 
@@ -62,7 +65,12 @@ public class EditGenresListDialogController {
                             Genre genre = getTableView().getItems().get(getIndex());
 
                             //Call edit dialog open
-                            boolean result = client.deleteGenre(genre);
+                            boolean result = false;
+                            try {
+                                result = client.deleteGenre(genre);
+                            } catch (MalformedURLException e) {
+                                e.printStackTrace();
+                            }
                             System.out.println(result);
 
                             genresList = FXCollections.observableArrayList(client.getGenres());
@@ -113,6 +121,11 @@ public class EditGenresListDialogController {
                             stage.setTitle("Edit genre");
                             stage.initModality(Modality.APPLICATION_MODAL);
                             stage.setResizable(false);
+                            try {
+                                stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
+                            } catch (MalformedURLException e) {
+                                e.printStackTrace();
+                            }
                             stage.setScene(scene);
                             stage.showAndWait();
 

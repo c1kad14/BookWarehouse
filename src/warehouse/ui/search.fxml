@@ -9,7 +9,7 @@
         <Button fx:id="filterBtn" layoutX="27.0" layoutY="27.0" mnemonicParsing="false" onAction="#filterBtnClick"
                 prefHeight="40.0" prefWidth="109.0" text="Filter"/>
         <Button fx:id="addBtn" layoutX="476.0" layoutY="28.0" onAction="#addBtnClick" prefHeight="40.0"
-                prefWidth="102.0" text="ADD BOOK"/>
+                prefWidth="102.0" text="NEW BOOK"/>
         <Separator layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="575.0"/>
         <TextField fx:id="searchTextBox" layoutX="304.0" layoutY="33.0" prefHeight="34.0" prefWidth="151.0"/>
         <Label layoutX="162.0" layoutY="37.0" prefHeight="21.0" prefWidth="136.0" text="Type text to search:"/>

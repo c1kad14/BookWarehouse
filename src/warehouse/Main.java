@@ -4,11 +4,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import warehouse.controllers.ListController;
 import warehouse.controllers.MenuController;
 import warehouse.controllers.SearchController;
+
+import java.io.File;
 
 public class Main extends Application {
 
@@ -38,9 +41,9 @@ public class Main extends Application {
         primaryStage.setTitle("Book Warehouse");
         primaryStage.setScene(new Scene(root, 600, 500));
         primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);

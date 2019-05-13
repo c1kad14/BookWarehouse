@@ -1,19 +1,19 @@
 package warehouse.data;
 
-import com.sun.org.apache.xpath.internal.operations.And;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.sqlite.SQLiteConfig;
-import warehouse.controllers.EditGenreDialogController;
-import warehouse.controllers.NotificationDialogController;
 import warehouse.models.Author;
 import warehouse.models.Book;
 import warehouse.models.Genre;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -229,7 +229,7 @@ public class SQLiteClient {
         return book;
     }
 
-    public boolean deleteGenre(Genre genre) {
+    public boolean deleteGenre(Genre genre) throws MalformedURLException {
         try {
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
@@ -272,7 +272,7 @@ public class SQLiteClient {
         return genre;
     }
 
-    public boolean deleteAuthor(Author author) {
+    public boolean deleteAuthor(Author author) throws MalformedURLException {
         try {
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
@@ -360,7 +360,7 @@ public class SQLiteClient {
         return true;
     }
 
-    private void openNotification() {
+    private void openNotification() throws MalformedURLException {
         FXMLLoader notificationDialogLoader = new FXMLLoader(getClass().getResource("../ui/notificationDialog.fxml"));
         Parent notificationDialog = null;
         try {
@@ -375,6 +375,7 @@ public class SQLiteClient {
         stage.setTitle("Attention");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
+        stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
         stage.setScene(scene);
         stage.showAndWait();
 
