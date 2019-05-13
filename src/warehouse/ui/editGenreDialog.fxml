@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="282.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.EditGenreDialog">
-   <children>
-      <Button layoutX="282.0" layoutY="218.0" mnemonicParsing="false" text="Close" />
-      <Button layoutX="209.0" layoutY="218.0" mnemonicParsing="false" text="Save" />
-      <Label layoutX="42.0" layoutY="68.0" text="Id: " />
-      <TextField layoutX="151.0" layoutY="110.0" />
-      <Label layoutX="42.0" layoutY="115.0" prefHeight="21.0" prefWidth="88.0" text="First Name:" />
-      <TextField disable="true" layoutX="151.0" layoutY="63.0" />
-      <Label layoutX="42.0" layoutY="162.0" prefHeight="21.0" prefWidth="88.0" text="Last Name:" />
-      <TextField layoutX="151.0" layoutY="157.0" />
-   </children>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="247.0" prefWidth="331.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="warehouse.controllers.EditGenreDialogController">
+    <children>
+        <Label layoutX="42.0" layoutY="68.0" text="Id: "/>
+        <TextField fx:id="idTextBox" disable="true" layoutX="98.0" layoutY="63.0"/>
+        <Label layoutX="42.0" layoutY="115.0" prefHeight="21.0" prefWidth="56.0" text="Genre: "/>
+        <TextField fx:id="genreTextBox" layoutX="98.0" layoutY="110.0"/>
+        <Button fx:id="closeBtn" layoutX="229.0" layoutY="169.0" mnemonicParsing="false" text="Close" onAction="#closeBtnClick"/>
+        <Button fx:id="saveBtn" layoutX="157.0" layoutY="169.0" mnemonicParsing="false" text="Save" onAction="#saveBtnClick"/>
+    </children>
 </AnchorPane>

@@ -2,18 +2,17 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="400.0" prefWidth="568.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="warehouse.controllers.EditAuthorsListDialogController">
-   <children>
-      <TableView layoutX="40.0" layoutY="91.0" prefHeight="200.0" prefWidth="491.0">
-        <columns>
-          <TableColumn prefWidth="59.0" text="Id" />
-          <TableColumn prefWidth="113.0" text="First Name" />
-            <TableColumn prefWidth="141.0" text="Last Name" />
-            <TableColumn prefWidth="91.0" text="Edit" />
-            <TableColumn minWidth="0.0" prefWidth="86.0" text="Delete" />
-        </columns>
-      </TableView>
-      <Button layoutX="444.0" layoutY="334.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Close" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="568.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.EditAuthorsListDialogController">
+    <children>
+        <TableView fx:id="authorsView" layoutX="40.0" layoutY="91.0" prefHeight="200.0" prefWidth="495.0">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="59.0" text="Id" />
+                <TableColumn fx:id="firstNameColumn" prefWidth="133.0" text="First Name" />
+                <TableColumn fx:id="lastNameColumn" prefWidth="148.0" text="Last Name" />
+                <TableColumn fx:id="editColumn" prefWidth="75.0" text="Edit" />
+                <TableColumn fx:id="deleteColumn" prefWidth="78.0" text="Delete" />
+            </columns>
+        </TableView>
+        <Button fx:id="closeBtn" layoutX="444.0" layoutY="334.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Close" onAction="#closeBtnClick" />
+    </children>
 </AnchorPane>

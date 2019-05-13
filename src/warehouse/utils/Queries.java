@@ -27,4 +27,15 @@ public class Queries {
     public static final String INSERT_AUTHOR = "INSERT INTO Authors (FirstName, LastName) VALUES ('%s', '%s');";
     public static final String INSERT_GENRE = "INSERT INTO Genres (Name) VALUES ('%s');";
     public static final String INSERT_BOOK = "INSERT INTO Books (Title, Description, Path, AuthorId, GenreId) VALUES ('%s', '%s', '%s', %s, %s);";
+
+    public static final String UPDATE_AUTHOR = "UPDATE Authors SET FirstName = '%s', LastName = '%s' WHERE Id = %s;";
+    public static final String UPDATE_GENRE = "UPDATE Genres SET Name = '%s' WHERE Id = %s;";
+    public static final String UPDATE_BOOK = "UPDATE Books SET Title = '%s', Description = '%s', Path = '%s', AuthorId = %s, GenreId = %s WHERE Id = %s;";
+
+
+    public static final String DELETE_AUTHOR = "DELETE FROM Authors WHERE Id = %s;";
+    public static final String DELETE_GENRE = "DELETE FROM Genres WHERE Id = %s;";
+    public static final String DELETE_BOOK = "DELETE FROM Books WHERE Id = %s;";
+
+
 }

@@ -7,15 +7,18 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
 import warehouse.data.SQLiteClient;
 import warehouse.models.Author;
 import warehouse.models.Book;
 import warehouse.models.Genre;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import static warehouse.utils.StringConstants.BOOK_WAREHOUSE_FOLDER;
 import static warehouse.utils.StringConstants.SELECT_FILE_LABEL_TEXT;
 
 public class AddBookDialogController {
@@ -38,8 +41,6 @@ public class AddBookDialogController {
 
     @FXML
     public void initialize() {
-
-
         client = new SQLiteClient();
         selectedFileLabel.setText(SELECT_FILE_LABEL_TEXT);
 
@@ -70,18 +71,24 @@ public class AddBookDialogController {
     }
 
     public void addBtnClick(ActionEvent actionEvent) {
-        Book book = new Book();
-        book.setTitle(titleTextBox.getText());
-        book.setDescription(descTextBox.getText());
+        try {
+            File file = new File(selectedPath);
+            File bookDirectory = new File(BOOK_WAREHOUSE_FOLDER + "//" + System.currentTimeMillis());
+            bookDirectory.mkdirs();
 
-        Optional<Genre> genre = genres.stream().filter(g -> g.getName().equals(genresComboBox.getSelectionModel().getSelectedItem().toString())).findFirst();
-        book.setGenre(genre.get());
+            FileUtils.copyFileToDirectory(file, bookDirectory);
 
-        Optional<Author> author = authors.stream().filter(a -> a.toString().equals(authorsComboBox.getSelectionModel().getSelectedItem().toString())).findFirst();
-        book.setAuthor(author.get());
-        book.setPath(selectedPath);
+            Book book = new Book();
+            book.setTitle(titleTextBox.getText());
+            book.setDescription(descTextBox.getText());
+            book.setGenre(genres.stream().filter(g -> g.getName().equals(genresComboBox.getSelectionModel().getSelectedItem().toString())).findFirst().get());
+            book.setAuthor(authors.stream().filter(a -> a.toString().equals(authorsComboBox.getSelectionModel().getSelectedItem().toString())).findFirst().get());
+            book.setPath(bookDirectory.getPath() + "//" + file.getName());
 
-        client.addBook(book);
+            client.addBook(book);
+        } catch (IOException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
         close();
     }
 
@@ -96,9 +103,7 @@ public class AddBookDialogController {
 
     private void addListeners() {
         genresComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> shouldAddButtonBeEnabled());
-
         authorsComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> shouldAddButtonBeEnabled());
-
         titleTextBox.textProperty().addListener((observable, oldValue, newValue) -> shouldAddButtonBeEnabled());
     }
 

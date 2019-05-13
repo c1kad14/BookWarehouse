@@ -2,18 +2,19 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="400.0" prefWidth="568.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.EditBooksListDialogController">
-   <children>
-      <TableView layoutX="40.0" layoutY="91.0" prefHeight="200.0" prefWidth="491.0">
-        <columns>
-          <TableColumn prefWidth="33.0" text="Id" />
-          <TableColumn prefWidth="98.0" text="Title" />
-            <TableColumn prefWidth="106.0" text="Author" />
-            <TableColumn prefWidth="102.0" text="Genre" />
-            <TableColumn prefWidth="74.0" text="Edit" />
-            <TableColumn prefWidth="77.0" text="Delete" />
-        </columns>
-      </TableView>
-      <Button layoutX="444.0" layoutY="334.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Close" />
-   </children>
+<AnchorPane prefHeight="326.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.EditBooksListDialogController">
+    <children>
+        <TableView fx:id="booksView" layoutX="40.0" layoutY="45.0" prefHeight="200.0" prefWidth="591.0">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="33.0" text="Id" />
+                <TableColumn fx:id="titleColumn" prefWidth="98.0" text="Title" />
+                <TableColumn fx:id="authorColumn" prefWidth="106.0" text="Author" />
+                <TableColumn fx:id="genreColumn" prefWidth="102.0" text="Genre" />
+                <TableColumn fx:id="descColumn" prefWidth="102.0" text="Description" />
+                <TableColumn fx:id="editColumn" prefWidth="74.0" text="Edit" />
+                <TableColumn fx:id="deleteColumn" prefWidth="77.0" text="Delete" />
+            </columns>
+        </TableView>
+        <Button fx:id="closeBtn" layoutX="544.0" layoutY="268.0" mnemonicParsing="false" onAction="#closeBtnClick" prefHeight="31.0" prefWidth="87.0" text="Close" />
+    </children>
 </AnchorPane>

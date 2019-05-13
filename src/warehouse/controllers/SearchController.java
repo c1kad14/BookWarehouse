@@ -73,12 +73,10 @@ public class SearchController implements FilterListener {
     public void filterSelectionChanged(List<Genre> selectedGenres, List<Author> selectedAuthors) {
         this.selectedGenres = selectedGenres;
         this.selectedAuthors = selectedAuthors;
-        if(this.selectedGenres.size() > 0 || this.selectedAuthors.size() > 0) {
-            listController.bookListChanged(client.getBooks(searchTextBox.getText(), this.selectedGenres, this.selectedAuthors));
-        }
+        listController.bookListChanged(searchTextBox.getText(), this.selectedGenres, this.selectedAuthors);
     }
 
-    public List<Genre> getSelectedGenres(){
+    public List<Genre> getSelectedGenres() {
         return this.selectedGenres;
     }
 
@@ -88,6 +86,6 @@ public class SearchController implements FilterListener {
 
     private void addListeners() {
         searchTextBox.textProperty().addListener((observable, oldValue, newValue) ->
-                listController.bookListChanged(client.getBooks(searchTextBox.getText(), this.selectedGenres, this.selectedAuthors)));
+                listController.bookListChanged(searchTextBox.getText(), this.selectedGenres, this.selectedAuthors));
     }
 }

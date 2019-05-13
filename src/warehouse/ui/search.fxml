@@ -1,42 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="94.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.SearchController">
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="16.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="126.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="19.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="147.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="181.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="88.0" minWidth="10.0" prefWidth="81.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="81.0" minWidth="10.0" prefWidth="22.0" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-    </rowConstraints>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="94.0" prefWidth="602.0" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="warehouse.controllers.SearchController">
     <children>
-        <Button fx:id="filterBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#filterBtnClick" prefHeight="40.0" prefWidth="109.0" text="Filter" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </padding>
-            <GridPane.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </GridPane.margin>
-        </Button>
-        <Button fx:id="addBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addBtnClick" prefHeight="40.0" prefWidth="54.0" text="NEW" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </padding>
-            <GridPane.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </GridPane.margin>
-        </Button>
-        <Separator prefHeight="25.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="2" />
-      <TextField fx:id="searchTextBox" prefHeight="34.0" prefWidth="133.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-      <Label prefHeight="21.0" prefWidth="136.0" text="Type text to search:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <Button fx:id="filterBtn" layoutX="27.0" layoutY="27.0" mnemonicParsing="false" onAction="#filterBtnClick"
+                prefHeight="40.0" prefWidth="109.0" text="Filter"/>
+        <Button fx:id="addBtn" layoutX="476.0" layoutY="28.0" onAction="#addBtnClick" prefHeight="40.0"
+                prefWidth="102.0" text="ADD BOOK"/>
+        <Separator layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="575.0"/>
+        <TextField fx:id="searchTextBox" layoutX="304.0" layoutY="33.0" prefHeight="34.0" prefWidth="151.0"/>
+        <Label layoutX="162.0" layoutY="37.0" prefHeight="21.0" prefWidth="136.0" text="Type text to search:"/>
     </children>
-</GridPane>
+</AnchorPane>

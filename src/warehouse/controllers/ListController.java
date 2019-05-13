@@ -22,10 +22,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static warehouse.utils.StringConstants.*;
+
 public class ListController implements BookListener {
     public TableView booksView;
-    public ObservableList<Genre> genres;
-    public ObservableList<Author> authors;
+    public List<Genre> genres;
+    public List<Author> authors;
 
     public TableColumn titleColumn;
     public TableColumn authorColumn;
@@ -35,18 +37,20 @@ public class ListController implements BookListener {
 
     private SQLiteClient client;
 
+    private String searchValue;
+
     @FXML
     public void initialize() {
         client = new SQLiteClient();
         List<Book> bl = client.getBooks("", new ArrayList<>(), new ArrayList<>());
+        genres = new ArrayList<>();
+        authors = new ArrayList<>();
+        searchValue = EMPTY_STRING;
 
-        genres = FXCollections.observableArrayList(client.getGenres());
-        authors = FXCollections.observableArrayList(client.getAuthors());
-
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("Author"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        genreColumn.setCellValueFactory(new PropertyValueFactory<>("Genre"));
-        descColumn.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>(AUTHOR_FIELD));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>(TITLE_FIELD));
+        genreColumn.setCellValueFactory(new PropertyValueFactory<>(GENRE_FIELD));
+        descColumn.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION_FIELD));
         actionColumn.setCellFactory(initActionButton());
         booksView.setItems(FXCollections.observableArrayList(bl));
     }
@@ -89,17 +93,17 @@ public class ListController implements BookListener {
     }
 
     @Override
-    public void bookListChanged(List<Book> books) {
-        booksView.setItems(FXCollections.observableArrayList(books));
-    }
-
-    @Override
     public void bookListChanged() {
-        booksView.setItems(FXCollections.observableArrayList(client.getBooks("", new ArrayList<>(), new ArrayList<>())));
+        booksView.setItems(FXCollections.observableArrayList(
+                client.getBooks(this.searchValue, this.genres, this.authors)));
     }
 
     @Override
-    public void bookListChanged(List<Genre> genres, List<Author> authors) {
-       // booksView.setItems(FXCollections.observableArrayList(client.getBooks(genres, authors)));
+    public void bookListChanged(String searchValue, List<Genre> genres, List<Author> authors) {
+        this.searchValue = searchValue;
+        this.genres = genres;
+        this.authors = authors;
+
+        booksView.setItems(FXCollections.observableArrayList(client.getBooks(searchValue, genres, authors)));
     }
 }

@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="warehouse.controllers.EditBookDialog"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="524.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.EditBookDialogController">
+    <children>
+        <Label layoutX="100.0" layoutY="53.0" text="Id: " />
+        <Label layoutX="86.0" layoutY="93.0" text="Title: " />
+        <Label layoutX="69.0" layoutY="133.0" text="Author: " />
+        <Label layoutX="74.0" layoutY="172.0" text="Genre: " />
+        <Label layoutX="41.0" layoutY="209.0" text="Description:" />
+        <ComboBox fx:id="authorsComboBox" layoutX="139.0" layoutY="126.0" prefHeight="31.0" prefWidth="187.0" />
+        <ComboBox fx:id="genresComboBox" layoutX="139.0" layoutY="168.0" prefHeight="31.0" prefWidth="187.0" />
+        <TextField fx:id="idTextBox" disable="true" layoutX="139.0" layoutY="46.0" />
+        <TextField fx:id="titleTextBox" layoutX="139.0" layoutY="86.0" />
+        <TextArea fx:id="descTextBox" layoutX="139.0" layoutY="215.0" prefHeight="145.0" prefWidth="187.0" />
+        <Label fx:id="selectedFileLabel" layoutX="140.0" layoutY="386.0" prefHeight="21.0" prefWidth="187.0" />
+        <Button fx:id="selectFileBtn" layoutX="39.0" layoutY="380.0" mnemonicParsing="false" onAction="#selectFileBtnClick" prefHeight="31.0" prefWidth="86.0" text="Select file" />
 
+        <Button fx:id="saveBtn" layoutX="180.0" layoutY="444.0" mnemonicParsing="false" onAction="#saveBtnClick" prefHeight="31.0" prefWidth="65.0" text="Save" />
+        <Button fx:id="closeBtn" layoutX="261.0" layoutY="443.0" mnemonicParsing="false" onAction="#closeBtnClick" prefHeight="31.0" prefWidth="65.0" text="Close" />
+    </children>
 </AnchorPane>

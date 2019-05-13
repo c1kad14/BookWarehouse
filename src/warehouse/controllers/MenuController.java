@@ -22,9 +22,8 @@ public class MenuController {
     public MenuItem aboutMenuItem;
     private ListController listController;
 
-    @FXML
-    public void initialize() {
-
+    public void setListController(ListController listController) {
+        this.listController = listController;
     }
 
     public void addAuthorMenuItemClick(ActionEvent actionEvent) {
@@ -77,7 +76,59 @@ public class MenuController {
         stage.showAndWait();
     }
 
-    public void setListController(ListController listController) {
-        this.listController = listController;
+    public void editAuthorsMenuItemClick(ActionEvent actionEvent) {
+        Parent dialog = null;
+        try {
+            dialog = FXMLLoader.load(getClass().getResource("../ui/editAuthorsListDialog.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(dialog, 568, 400);
+        Stage stage = new Stage();
+        stage.setTitle("Edit Authors");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.showAndWait();
+
+
+        listController.bookListChanged();
+    }
+
+    public void editGenresMenuItemClick(ActionEvent actionEvent) {
+        Parent dialog = null;
+        try {
+            dialog = FXMLLoader.load(getClass().getResource("../ui/editGenresListDialog.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(dialog, 568, 383);
+        Stage stage = new Stage();
+        stage.setTitle("Edit Genres");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.showAndWait();
+
+
+        listController.bookListChanged();
+    }
+
+    public void editBooksMenuItemClick(ActionEvent actionEvent) {
+        Parent dialog = null;
+        try {
+            dialog = FXMLLoader.load(getClass().getResource("../ui/editBooksListDialog.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(dialog, 662, 326);
+        Stage stage = new Stage();
+        stage.setTitle("Edit Books");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.showAndWait();
+
+        listController.bookListChanged();
     }
 }
