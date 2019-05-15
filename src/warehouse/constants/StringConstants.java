@@ -1,4 +1,4 @@
-package warehouse.utils;
+package warehouse.constants;
 
 /**
  * Class that contains string constants

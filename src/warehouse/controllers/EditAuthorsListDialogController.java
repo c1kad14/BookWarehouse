@@ -23,8 +23,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import static warehouse.utils.StringConstants.*;
+import static warehouse.constants.StringConstants.*;
 
+/**
+ * Controller class for Edit Authors Dialog
+ */
 public class EditAuthorsListDialogController {
     public TableView authorsView;
     public TableColumn idColumn;
@@ -71,7 +74,7 @@ public class EditAuthorsListDialogController {
                             try {
                                 result = client.deleteAuthor(author);
                             } catch (MalformedURLException e) {
-                                e.printStackTrace();
+                                System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
                             System.out.println(result);
 
@@ -112,7 +115,7 @@ public class EditAuthorsListDialogController {
                             try {
                                 editAuthorDialog = authorDialogLoader.load();
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
                             EditAuthorDialogController filterDialogController = authorDialogLoader.getController();
 
@@ -127,7 +130,7 @@ public class EditAuthorsListDialogController {
                             try {
                                 stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
                             } catch (MalformedURLException e) {
-                                e.printStackTrace();
+                                System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
                             stage.setScene(scene);
                             stage.showAndWait();

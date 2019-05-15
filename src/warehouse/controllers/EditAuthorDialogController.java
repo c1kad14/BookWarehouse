@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import warehouse.data.SQLiteClient;
 import warehouse.models.Author;
 
+/**
+ * Controller class for Edit Author Dialog
+ */
 public class EditAuthorDialogController {
     public TextField idTextBox;
     public TextField firstNameTextBox;
@@ -29,22 +32,16 @@ public class EditAuthorDialogController {
         lastNameTextBox.setText(this.author.getLastName());
     }
 
+    public void saveBtnClick(ActionEvent actionEvent) {
+        author.setFirstName(firstNameTextBox.getText());
+        author.setLastName(lastNameTextBox.getText());
+        client.updateAuthor(author);
+        close();
+    }
 
     public void closeBtnClick(ActionEvent actionEvent) {
         close();
     }
 
-    public void saveBtnClick(ActionEvent actionEvent) {
-        author.setFirstName(firstNameTextBox.getText());
-        author.setLastName(lastNameTextBox.getText());
-        Author result = client.updateAuthor(author);
-
-        System.out.println(result);
-
-        close();
-    }
-
-    private void close() {
-        ((Stage) closeBtn.getScene().getWindow()).close();
-    }
+    private void close() { ((Stage) closeBtn.getScene().getWindow()).close(); }
 }

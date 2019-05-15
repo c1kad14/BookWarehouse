@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * Controller class for Notification Dialog
+ */
 public class NotificationDialogController {
     public Button closeBtn;
 
@@ -11,7 +14,5 @@ public class NotificationDialogController {
         close();
     }
 
-    private void close() {
-        ((Stage) closeBtn.getScene().getWindow()).close();
-    }
+    private void close() { ((Stage) closeBtn.getScene().getWindow()).close(); }
 }

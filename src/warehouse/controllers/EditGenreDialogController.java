@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import warehouse.data.SQLiteClient;
 import warehouse.models.Genre;
 
+/**
+ * Controller class for Edit Genre Dialog
+ */
 public class EditGenreDialogController {
     public TextField idTextBox;
     public TextField genreTextBox;
@@ -27,16 +30,16 @@ public class EditGenreDialogController {
         this.genreTextBox.setText(this.genre.getName());
     }
 
-    public void closeBtnClick(ActionEvent actionEvent) {
-        close();
-    }
-
     public void saveBtnClick(ActionEvent actionEvent) {
         genre.setName(genreTextBox.getText());
         Genre result = client.updateGenre(genre);
 
         System.out.println(result);
 
+        close();
+    }
+
+    public void closeBtnClick(ActionEvent actionEvent) {
         close();
     }
 

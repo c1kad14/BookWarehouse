@@ -1,5 +1,8 @@
 package warehouse.models;
 
+/**
+ * Model for Book record
+ */
 public class Book {
     private int id;
     private String title;

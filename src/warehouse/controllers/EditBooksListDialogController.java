@@ -18,17 +18,18 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.apache.commons.io.FileUtils;
 import warehouse.data.SQLiteClient;
-import warehouse.models.Author;
 import warehouse.models.Book;
-import warehouse.models.Genre;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
-import static warehouse.utils.StringConstants.*;
+import static warehouse.constants.StringConstants.*;
 
+/**
+ * Controller class for Edit Books Dialog
+ */
 public class EditBooksListDialogController {
     public TableView booksView;
     public TableColumn idColumn;
@@ -122,7 +123,7 @@ public class EditBooksListDialogController {
                             try {
                                 editBookDialog = bookDialogLoader.load();
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
                             EditBookDialogController editBookDialogController = bookDialogLoader.getController();
                             editBookDialogController.setBook(book);
@@ -136,7 +137,7 @@ public class EditBooksListDialogController {
                             try {
                                 stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
                             } catch (MalformedURLException e) {
-                                e.printStackTrace();
+                                System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
                             stage.setScene(scene);
                             stage.showAndWait();

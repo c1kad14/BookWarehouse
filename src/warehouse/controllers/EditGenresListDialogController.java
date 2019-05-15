@@ -23,8 +23,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import static warehouse.utils.StringConstants.*;
+import static warehouse.constants.StringConstants.*;
 
+/**
+ * Controller class for Edit Genres Dialog
+ */
 public class EditGenresListDialogController {
     public TableView genresView;
     public TableColumn idColumn;
@@ -69,7 +72,7 @@ public class EditGenresListDialogController {
                             try {
                                 result = client.deleteGenre(genre);
                             } catch (MalformedURLException e) {
-                                e.printStackTrace();
+                                System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
                             System.out.println(result);
 
@@ -110,7 +113,7 @@ public class EditGenresListDialogController {
                             try {
                                 editGenreDialog = genreDialogLoader.load();
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
                             EditGenreDialogController editGenreDialogController = genreDialogLoader.getController();
                             editGenreDialogController.setGenre(genre);
@@ -124,7 +127,7 @@ public class EditGenresListDialogController {
                             try {
                                 stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
                             } catch (MalformedURLException e) {
-                                e.printStackTrace();
+                                System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
                             stage.setScene(scene);
                             stage.showAndWait();

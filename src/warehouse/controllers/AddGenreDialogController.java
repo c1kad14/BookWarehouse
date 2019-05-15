@@ -8,9 +8,12 @@ import javafx.stage.Stage;
 import warehouse.data.SQLiteClient;
 import warehouse.models.Genre;
 
+/**
+ * Controller class responsible for Add Genre Dialog
+ */
 public class AddGenreDialogController {
     public TextField genreTextBox;
-    public Button saveBtn;
+    public Button addBtn;
     public Button cancelBtn;
     private SQLiteClient client;
 
@@ -24,16 +27,17 @@ public class AddGenreDialogController {
         close();
     }
 
-    public void saveBtnClick(ActionEvent actionEvent) {
+    public void addBtnClick(ActionEvent actionEvent) {
         client.addGenre(new Genre(genreTextBox.getText()));
         close();
     }
 
+    /**
+     * Method that text fields listeners
+     */
     private void addListeners() {
-        genreTextBox.textProperty().addListener((observable, oldValue, newValue) -> saveBtn.setDisable(genreTextBox.getText().isEmpty()));
+        genreTextBox.textProperty().addListener((observable, oldValue, newValue) -> addBtn.setDisable(genreTextBox.getText().isEmpty()));
     }
 
-    private void close() {
-        ((Stage) cancelBtn.getScene().getWindow()).close();
-    }
+    private void close() { ((Stage) cancelBtn.getScene().getWindow()).close(); }
 }

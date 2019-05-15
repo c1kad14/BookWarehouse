@@ -18,9 +18,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static warehouse.utils.Queries.*;
-import static warehouse.utils.StringConstants.*;
+import static warehouse.constants.Queries.*;
+import static warehouse.constants.StringConstants.*;
 
+/**
+ * Class responsible for database connection and retrieving records
+ */
 public class SQLiteClient {
 
     Connection connection = null;
@@ -366,7 +369,7 @@ public class SQLiteClient {
         try {
             notificationDialog = notificationDialogLoader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
 
         Scene scene = new Scene(notificationDialog, 375, 121);

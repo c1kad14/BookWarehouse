@@ -1,7 +1,6 @@
 package warehouse.controllers;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,8 +21,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static warehouse.utils.StringConstants.*;
+import static warehouse.constants.StringConstants.*;
 
+/**
+ * Controller class for List Component
+ */
 public class ListController implements BookListener {
     public TableView booksView;
     public List<Genre> genres;
@@ -53,6 +55,21 @@ public class ListController implements BookListener {
         descColumn.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION_FIELD));
         actionColumn.setCellFactory(initActionButton());
         booksView.setItems(FXCollections.observableArrayList(bl));
+    }
+
+    @Override
+    public void bookListChanged() {
+        booksView.setItems(FXCollections.observableArrayList(
+                client.getBooks(this.searchValue, this.genres, this.authors)));
+    }
+
+    @Override
+    public void bookListChanged(String searchValue, List<Genre> genres, List<Author> authors) {
+        this.searchValue = searchValue;
+        this.genres = genres;
+        this.authors = authors;
+
+        booksView.setItems(FXCollections.observableArrayList(client.getBooks(searchValue, genres, authors)));
     }
 
     private Callback<TableColumn<Book, Void>, TableCell<Book, Void>> initActionButton() {
@@ -90,20 +107,5 @@ public class ListController implements BookListener {
             }
         };
 
-    }
-
-    @Override
-    public void bookListChanged() {
-        booksView.setItems(FXCollections.observableArrayList(
-                client.getBooks(this.searchValue, this.genres, this.authors)));
-    }
-
-    @Override
-    public void bookListChanged(String searchValue, List<Genre> genres, List<Author> authors) {
-        this.searchValue = searchValue;
-        this.genres = genres;
-        this.authors = authors;
-
-        booksView.setItems(FXCollections.observableArrayList(client.getBooks(searchValue, genres, authors)));
     }
 }

@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller Class for Search Controller
+ */
 public class SearchController implements FilterListener {
     public Button filterBtn;
     public Button addBtn;
@@ -88,6 +91,9 @@ public class SearchController implements FilterListener {
         return this.selectedAuthors;
     }
 
+    /**
+     * Method that text fields listeners
+     */
     private void addListeners() {
         searchTextBox.textProperty().addListener((observable, oldValue, newValue) ->
                 listController.bookListChanged(searchTextBox.getText(), this.selectedGenres, this.selectedAuthors));

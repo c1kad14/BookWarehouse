@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.net.MalformedURLException;
 
+/**
+ * Controller class for About Dialog
+ */
 public class AboutController {
     public Button closeBtn;
     public ImageView imageView;
@@ -19,7 +22,7 @@ public class AboutController {
         try {
             imageView.setImage(new Image(new File(System.getProperty("user.dir") + "//atmc.png").toURI().toURL().toString(), false));
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
 

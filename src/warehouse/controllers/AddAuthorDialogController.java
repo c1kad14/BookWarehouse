@@ -8,10 +8,13 @@ import javafx.stage.Stage;
 import warehouse.data.SQLiteClient;
 import warehouse.models.Author;
 
+/**
+ * Controller class for Add Author Dialog
+ */
 public class AddAuthorDialogController {
     public TextField firstNameTextBox;
     public TextField lastNameTextBox;
-    public Button saveBtn;
+    public Button addBtn;
     public Button cancelBtn;
     private SQLiteClient client;
 
@@ -21,7 +24,7 @@ public class AddAuthorDialogController {
         addListeners();
     }
 
-    public void saveBtnClick(ActionEvent actionEvent) {
+    public void addBtnClick(ActionEvent actionEvent) {
         client.addAuthor(new Author(firstNameTextBox.getText(), lastNameTextBox.getText()));
         close();
     }
@@ -30,14 +33,20 @@ public class AddAuthorDialogController {
         close();
     }
 
+    /**
+     * Method that enable or disable Save Button
+     */
     private void shouldSaveButtonBeEnabled() {
         if (this.firstNameTextBox.getText().isEmpty() && this.lastNameTextBox.getText().isEmpty()) {
-            saveBtn.setDisable(true);
+            addBtn.setDisable(true);
         } else {
-            saveBtn.setDisable(false);
+            addBtn.setDisable(false);
         }
     }
 
+    /**
+     * Method that text fields listeners
+     */
     private void addListeners() {
         firstNameTextBox.textProperty().addListener((observable, oldValue, newValue) -> shouldSaveButtonBeEnabled());
         lastNameTextBox.textProperty().addListener((observable, oldValue, newValue) -> shouldSaveButtonBeEnabled());

@@ -1,5 +1,8 @@
 package warehouse.models;
 
+/**
+ * Model for Author record
+ */
 public class Author {
     private int id;
     private String firstName;

@@ -17,9 +17,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static warehouse.utils.StringConstants.BOOK_WAREHOUSE_FOLDER;
-import static warehouse.utils.StringConstants.SELECT_FILE_LABEL_TEXT;
+import static warehouse.constants.StringConstants.BOOK_WAREHOUSE_FOLDER;
+import static warehouse.constants.StringConstants.SELECT_FILE_LABEL_TEXT;
 
+/**
+ * Controller class for Add Book Dialog
+ */
 public class AddBookDialogController {
 
     @FXML
@@ -55,11 +58,6 @@ public class AddBookDialogController {
         shouldAddButtonBeEnabled();
     }
 
-
-    public void cancelBtnClick(ActionEvent actionEvent) {
-        close();
-    }
-
     public void selectFileBtnClick(ActionEvent actionEvent) {
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
@@ -91,6 +89,13 @@ public class AddBookDialogController {
         close();
     }
 
+    public void cancelBtnClick(ActionEvent actionEvent) {
+        close();
+    }
+
+    /**
+     * Method that enable or disable Add Button
+     */
     private void shouldAddButtonBeEnabled() {
         if (this.titleTextBox.getText().isEmpty() || this.authorsComboBox.getSelectionModel().isEmpty()
                 || this.genresComboBox.getSelectionModel().isEmpty() || selectedFileLabel.getText().equals(SELECT_FILE_LABEL_TEXT)) {
@@ -100,6 +105,9 @@ public class AddBookDialogController {
         }
     }
 
+    /**
+     * Method that combo boxes and text fields listeners
+     */
     private void addListeners() {
         genresComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> shouldAddButtonBeEnabled());
         authorsComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> shouldAddButtonBeEnabled());

@@ -13,6 +13,9 @@ import warehouse.controllers.SearchController;
 
 import java.io.File;
 
+/**
+ * Main class for Application
+ */
 public class Main extends Application {
 
     @Override

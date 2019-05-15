@@ -16,9 +16,12 @@ import warehouse.models.Genre;
 import java.io.File;
 import java.io.IOException;
 
-import static warehouse.utils.StringConstants.BOOK_WAREHOUSE_FOLDER;
-import static warehouse.utils.StringConstants.SELECT_FILE_LABEL_TEXT;
+import static warehouse.constants.StringConstants.BOOK_WAREHOUSE_FOLDER;
+import static warehouse.constants.StringConstants.SELECT_FILE_LABEL_TEXT;
 
+/**
+ * Controller class for Edit Books Dialog
+ */
 public class EditBookDialogController {
     public ComboBox authorsComboBox;
     public ComboBox genresComboBox;
@@ -63,10 +66,6 @@ public class EditBookDialogController {
         this.genresComboBox.getSelectionModel().select(genres.stream().filter(g -> g.getId() == this.book.getGenre().getId()).findFirst().get());
     }
 
-    public void closeBtnClick(ActionEvent actionEvent) {
-        close();
-    }
-
     public void saveBtnClick(ActionEvent actionEvent) {
         try {
             //delete old directory
@@ -93,6 +92,13 @@ public class EditBookDialogController {
         close();
     }
 
+    public void closeBtnClick(ActionEvent actionEvent) {
+        close();
+    }
+
+    /**
+     * Method that enable or disable Save Button
+     */
     private void shouldSaveButtonBeEnabled() {
         if (this.titleTextBox.getText().isEmpty()) {
             saveBtn.setDisable(true);

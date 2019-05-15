@@ -16,6 +16,9 @@ import warehouse.models.Genre;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller class for Filter Dialog
+ */
 public class FilterDialogController {
     public GridPane pane;
     public Button applyBtn;
@@ -76,6 +79,11 @@ public class FilterDialogController {
         close();
     }
 
+    /**
+     * Method that inits controller with existing selections from search controller
+     *
+     * @param searchController search controller instance
+     */
     public void init(SearchController searchController) {
         this.searchController = searchController;
         this.selectedAuthors = searchController.getSelectedAuthors();
@@ -98,7 +106,7 @@ public class FilterDialogController {
         for (int i = 0; i < genresCheckBoxesList.size(); i++) {
             CheckBox genreCheckBox = genresCheckBoxesList.get(i);
             genreCheckBox.setOnAction(event -> {
-                if(genreCheckBox.isSelected()) {
+                if (genreCheckBox.isSelected()) {
                     selectedGenres.add(genres.stream().filter(g -> g.toString().equals(genreCheckBox.getText())).findFirst().get());
                 } else {
                     selectedGenres.removeIf(sg -> sg.getId() == genres.stream().filter(g -> g.toString().equals(genreCheckBox.getText())).findFirst().get().getId());
@@ -126,6 +134,9 @@ public class FilterDialogController {
         GridPane.setConstraints(authorsButton, 0, genres.size() / 3 + 3);
     }
 
+    /**
+     * Method that inits controls with existing selections
+     */
     private void initSelections() {
         selectedGenres.forEach(sg -> genresCheckBoxesList.stream().filter(gcb ->
                 gcb.getText().equals(sg.getName())).findFirst().get().setSelected(true));
@@ -136,6 +147,9 @@ public class FilterDialogController {
         setAuthorsBtnText();
     }
 
+    /**
+     * Method that sets text for selected authors
+     */
     private void setAuthorsBtnText() {
         String selectedAuthorsText = new String();
 
@@ -154,7 +168,5 @@ public class FilterDialogController {
         authorsButton.setText(selectedAuthorsText);
     }
 
-    private void close() {
-        ((Stage) applyBtn.getScene().getWindow()).close();
-    }
+    private void close() { ((Stage) applyBtn.getScene().getWindow()).close(); }
 }

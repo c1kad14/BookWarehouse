@@ -1,5 +1,8 @@
 package warehouse.models;
 
+/**
+ * Model for Genre record
+ */
 public class Genre {
     private int id;
     private String name;
