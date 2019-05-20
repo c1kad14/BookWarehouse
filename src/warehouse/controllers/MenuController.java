@@ -23,7 +23,6 @@ public class MenuController {
     public MenuItem editAuthorsMenuItem;
     public MenuItem editBooksMenuItem;
     public MenuItem editGenresMenuItem;
-    public MenuItem helpMenuItem;
     public MenuItem aboutMenuItem;
     private ListController listController;
 

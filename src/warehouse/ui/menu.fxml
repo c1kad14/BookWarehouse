@@ -25,7 +25,6 @@
             </Menu>
             <Menu text="Help">
                 <items>
-                    <MenuItem fx:id="helpMenuItem" text="Help"/>
                     <MenuItem fx:id="aboutMenuItem" text="About" onAction="#aboutMenuItemClick"/>
                 </items>
             </Menu>
