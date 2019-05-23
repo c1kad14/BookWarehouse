@@ -6,10 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import warehouse.data.SQLiteClient;
-import warehouse.models.Genre;
+import warehouse.models.Type;
 
 /**
- * Controller class for Edit Genre Dialog
+ * Controller class for Edit Type Dialog
  */
 public class EditGenreDialogController {
     public TextField idTextBox;
@@ -17,22 +17,22 @@ public class EditGenreDialogController {
     public Button closeBtn;
     public Button saveBtn;
     private SQLiteClient client;
-    private Genre genre;
+    private Type type;
 
     @FXML
     public void initialize() {
         client = new SQLiteClient();
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-        this.idTextBox.setText(String.valueOf(this.genre.getId()));
-        this.genreTextBox.setText(this.genre.getName());
+    public void setType(Type type) {
+        this.type = type;
+        this.idTextBox.setText(String.valueOf(this.type.getId()));
+        this.genreTextBox.setText(this.type.getName());
     }
 
     public void saveBtnClick(ActionEvent actionEvent) {
-        genre.setName(genreTextBox.getText());
-        Genre result = client.updateGenre(genre);
+        type.setName(genreTextBox.getText());
+        Type result = client.updateGenre(type);
 
         System.out.println(result);
 

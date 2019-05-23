@@ -11,7 +11,7 @@ import org.apache.commons.io.FileUtils;
 import warehouse.data.SQLiteClient;
 import warehouse.models.Author;
 import warehouse.models.Book;
-import warehouse.models.Genre;
+import warehouse.models.Type;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class EditBookDialogController {
     private SQLiteClient client;
     private Book book;
     private ObservableList<Author> authors;
-    private ObservableList<Genre> genres;
+    private ObservableList<Type> types;
     private FileChooser fileChooser;
     private String selectedPath;
 
@@ -42,14 +42,14 @@ public class EditBookDialogController {
     public void initialize() {
         client = new SQLiteClient();
         authors = FXCollections.observableArrayList(client.getAuthors());
-        genres = FXCollections.observableArrayList(client.getGenres());
+        types = FXCollections.observableArrayList(client.getGenres());
 
         selectedFileLabel.setText(SELECT_FILE_LABEL_TEXT);
 
         fileChooser = new FileChooser();
         titleTextBox.textProperty().addListener((observable, oldValue, newValue) -> shouldSaveButtonBeEnabled());
 
-        genresComboBox.setItems(FXCollections.observableArrayList(genres));
+        genresComboBox.setItems(FXCollections.observableArrayList(types));
         authorsComboBox.setItems(FXCollections.observableArrayList(authors));
 
         shouldSaveButtonBeEnabled();
@@ -61,9 +61,9 @@ public class EditBookDialogController {
         this.titleTextBox.setText(this.book.getTitle());
         this.selectedPath = this.book.getPath();
         this.selectedFileLabel.setText(new File(this.book.getPath()).getName());
-        this.descTextBox.setText(this.book.getDescription());
+        this.descTextBox.setText(this.book.getNotes());
         this.authorsComboBox.getSelectionModel().select(authors.stream().filter(a -> a.getId() == this.book.getAuthor().getId()).findFirst().get());
-        this.genresComboBox.getSelectionModel().select(genres.stream().filter(g -> g.getId() == this.book.getGenre().getId()).findFirst().get());
+        this.genresComboBox.getSelectionModel().select(types.stream().filter(g -> g.getId() == this.book.getType().getId()).findFirst().get());
     }
 
     public void saveBtnClick(ActionEvent actionEvent) {
@@ -78,8 +78,8 @@ public class EditBookDialogController {
             FileUtils.copyFileToDirectory(file, bookDirectory);
 
             this.book.setTitle(this.titleTextBox.getText());
-            this.book.setDescription(this.descTextBox.getText());
-            this.book.setGenre(this.genres.stream().filter(g ->
+            this.book.setNotes(this.descTextBox.getText());
+            this.book.setType(this.types.stream().filter(g ->
                     g.getName().equals(genresComboBox.getSelectionModel().getSelectedItem().toString())).findFirst().get());
             this.book.setAuthor(this.authors.stream().filter(a ->
                     a.toString().equals(authorsComboBox.getSelectionModel().getSelectedItem().toString())).findFirst().get());

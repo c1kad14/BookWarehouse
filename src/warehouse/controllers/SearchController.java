@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import warehouse.data.SQLiteClient;
 import warehouse.interfaces.FilterListener;
 import warehouse.models.Author;
-import warehouse.models.Genre;
+import warehouse.models.Type;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,13 +29,13 @@ public class SearchController implements FilterListener {
     public TextField searchTextBox;
     private ListController listController;
     private SQLiteClient client;
-    private List<Genre> selectedGenres;
+    private List<Type> selectedTypes;
     private List<Author> selectedAuthors;
 
     @FXML
     public void initialize() {
         client = new SQLiteClient();
-        selectedGenres = new ArrayList<>();
+        selectedTypes = new ArrayList<>();
         selectedAuthors = new ArrayList<>();
         addListeners();
     }
@@ -77,14 +77,14 @@ public class SearchController implements FilterListener {
     }
 
     @Override
-    public void filterSelectionChanged(List<Genre> selectedGenres, List<Author> selectedAuthors) {
-        this.selectedGenres = selectedGenres;
+    public void filterSelectionChanged(List<Type> selectedTypes, List<Author> selectedAuthors) {
+        this.selectedTypes = selectedTypes;
         this.selectedAuthors = selectedAuthors;
-        listController.bookListChanged(searchTextBox.getText(), this.selectedGenres, this.selectedAuthors);
+        listController.bookListChanged(searchTextBox.getText(), this.selectedTypes, this.selectedAuthors);
     }
 
-    public List<Genre> getSelectedGenres() {
-        return this.selectedGenres;
+    public List<Type> getSelectedTypes() {
+        return this.selectedTypes;
     }
 
     public List<Author> getSelectedAuthors() {
@@ -96,6 +96,6 @@ public class SearchController implements FilterListener {
      */
     private void addListeners() {
         searchTextBox.textProperty().addListener((observable, oldValue, newValue) ->
-                listController.bookListChanged(searchTextBox.getText(), this.selectedGenres, this.selectedAuthors));
+                listController.bookListChanged(searchTextBox.getText(), this.selectedTypes, this.selectedAuthors));
     }
 }

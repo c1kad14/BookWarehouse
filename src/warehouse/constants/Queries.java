@@ -6,12 +6,12 @@ package warehouse.constants;
 public class Queries {
     public static final String SELECT_BOOKS = "SELECT Books.Id as IdBook, Books.Title, Books.Description, Books.Path, " +
             "Authors.Id as IdAuthor, Authors.FirstName, Authors.LastName, Genres.Id as IdGenre, " +
-            "Genres.Name AS Genre FROM Books INNER JOIN Authors ON Books.AuthorId = Authors.Id "
+            "Genres.Name AS Type FROM Books INNER JOIN Authors ON Books.AuthorId = Authors.Id "
             + "INNER JOIN Genres ON Books.GenreId = Genres.Id";
 
     public static final String SELECT_BOOKS_FOR_SEARCH = "SELECT Books.Id as IdBook, Books.Title, Books.Description, Books.Path, " +
             "Authors.Id as IdAuthor, Authors.FirstName, Authors.LastName, Genres.Id as IdGenre, " +
-            "Genres.Name AS Genre FROM Books INNER JOIN Authors ON Books.AuthorId = Authors.Id "
+            "Genres.Name AS Type FROM Books INNER JOIN Authors ON Books.AuthorId = Authors.Id "
             + "INNER JOIN Genres ON Books.GenreId = Genres.Id WHERE Books.Title LIKE '%%%s%%' OR Authors.FirstName LIKE '%%%s%%' OR Authors.LastName LIKE '%%%s%%'";
 
     public static final String SEARCH_CLAUSE = "Books.Title LIKE '%%%s%%' OR Authors.FirstName LIKE '%%%s%%' OR Authors.LastName LIKE '%%%s%%'";

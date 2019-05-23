@@ -17,7 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import warehouse.data.SQLiteClient;
-import warehouse.models.Genre;
+import warehouse.models.Type;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class EditGenresListDialogController {
     public TableColumn genreColumn;
     public TableColumn editColumn;
     public TableColumn deleteColumn;
-    private ObservableList<Genre> genresList;
+    private ObservableList<Type> genresList;
     public Button closeBtn;
     private SQLiteClient client;
 
@@ -55,22 +55,22 @@ public class EditGenresListDialogController {
         close();
     }
 
-    private Callback<TableColumn<Genre, Void>, TableCell<Genre, Void>> getDeleteButton() {
-        return new Callback<TableColumn<Genre, Void>, TableCell<Genre, Void>>() {
+    private Callback<TableColumn<Type, Void>, TableCell<Type, Void>> getDeleteButton() {
+        return new Callback<TableColumn<Type, Void>, TableCell<Type, Void>>() {
             @Override
-            public TableCell<Genre, Void> call(final TableColumn<Genre, Void> param) {
-                final TableCell<Genre, Void> cell = new TableCell<Genre, Void>() {
+            public TableCell<Type, Void> call(final TableColumn<Type, Void> param) {
+                final TableCell<Type, Void> cell = new TableCell<Type, Void>() {
 
                     private final Button btn = new Button(DELETE_FIELD);
 
                     {
                         btn.setOnAction((ActionEvent event) -> {
-                            Genre genre = getTableView().getItems().get(getIndex());
+                            Type type = getTableView().getItems().get(getIndex());
 
                             //Call edit dialog open
                             boolean result = false;
                             try {
-                                result = client.deleteGenre(genre);
+                                result = client.deleteGenre(type);
                             } catch (MalformedURLException e) {
                                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
@@ -96,17 +96,17 @@ public class EditGenresListDialogController {
         };
     }
 
-    private Callback<TableColumn<Genre, Void>, TableCell<Genre, Void>> getEditButton() {
-        return new Callback<TableColumn<Genre, Void>, TableCell<Genre, Void>>() {
+    private Callback<TableColumn<Type, Void>, TableCell<Type, Void>> getEditButton() {
+        return new Callback<TableColumn<Type, Void>, TableCell<Type, Void>>() {
             @Override
-            public TableCell<Genre, Void> call(final TableColumn<Genre, Void> param) {
-                final TableCell<Genre, Void> cell = new TableCell<Genre, Void>() {
+            public TableCell<Type, Void> call(final TableColumn<Type, Void> param) {
+                final TableCell<Type, Void> cell = new TableCell<Type, Void>() {
 
                     private final Button btn = new Button(EDIT_FIELD);
 
                     {
                         btn.setOnAction((ActionEvent event) -> {
-                            Genre genre = getTableView().getItems().get(getIndex());
+                            Type type = getTableView().getItems().get(getIndex());
 
                             FXMLLoader genreDialogLoader = new FXMLLoader(getClass().getResource("../ui/editGenreDialog.fxml"));
                             Parent editGenreDialog = null;
@@ -116,12 +116,12 @@ public class EditGenresListDialogController {
                                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
                             EditGenreDialogController editGenreDialogController = genreDialogLoader.getController();
-                            editGenreDialogController.setGenre(genre);
+                            editGenreDialogController.setType(type);
 
                             Scene scene = new Scene(editGenreDialog, 331, 247);
                             Stage stage = new Stage();
 
-                            stage.setTitle("Edit genre");
+                            stage.setTitle("Edit type");
                             stage.initModality(Modality.APPLICATION_MODAL);
                             stage.setResizable(false);
                             try {

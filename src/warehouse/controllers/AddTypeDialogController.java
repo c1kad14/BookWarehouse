@@ -6,13 +6,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import warehouse.data.SQLiteClient;
-import warehouse.models.Genre;
+import warehouse.models.Type;
 
 /**
- * Controller class responsible for Add Genre Dialog
+ * Controller class responsible for Add Type Dialog
  */
-public class AddGenreDialogController {
-    public TextField genreTextBox;
+public class AddTypeDialogController {
+    public TextField typeTextBox;
     public Button addBtn;
     public Button cancelBtn;
     private SQLiteClient client;
@@ -28,7 +28,7 @@ public class AddGenreDialogController {
     }
 
     public void addBtnClick(ActionEvent actionEvent) {
-        client.addGenre(new Genre(genreTextBox.getText()));
+        client.addGenre(new Type(typeTextBox.getText()));
         close();
     }
 
@@ -36,7 +36,7 @@ public class AddGenreDialogController {
      * Method that text fields listeners
      */
     private void addListeners() {
-        genreTextBox.textProperty().addListener((observable, oldValue, newValue) -> addBtn.setDisable(genreTextBox.getText().isEmpty()));
+        typeTextBox.textProperty().addListener((observable, oldValue, newValue) -> addBtn.setDisable(typeTextBox.getText().isEmpty()));
     }
 
     private void close() { ((Stage) cancelBtn.getScene().getWindow()).close(); }

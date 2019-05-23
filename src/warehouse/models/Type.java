@@ -1,17 +1,17 @@
 package warehouse.models;
 
 /**
- * Model for Genre record
+ * Model for Type record
  */
-public class Genre {
+public class Type {
     private int id;
     private String name;
 
-    public Genre(String name) {
+    public Type(String name) {
         this.name = name;
     }
 
-    public Genre(int id, String name) {
+    public Type(int id, String name) {
         this.id = id;
         this.name = name;
     }

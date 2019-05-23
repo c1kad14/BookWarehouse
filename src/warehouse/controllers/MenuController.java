@@ -69,7 +69,7 @@ public class MenuController {
     public void addGenreMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
-            dialog = FXMLLoader.load(getClass().getResource("../ui/addGenreDialog.fxml"));
+            dialog = FXMLLoader.load(getClass().getResource("../ui/addTypeDialog.fxml"));
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }

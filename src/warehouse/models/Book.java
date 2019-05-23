@@ -7,9 +7,11 @@ public class Book {
     private int id;
     private String title;
     private Author author;
-    private Genre genre;
+    private Type type;
     private String path;
-    private String description;
+    private String year;
+    private String publisher;
+    private String notes;
 
     public int getId() {
         return id;
@@ -35,12 +37,12 @@ public class Book {
         this.author = author;
     }
 
-    public Genre getGenre() {
-        return genre;
+    public Type getType() {
+        return type;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public String getPath() {
@@ -51,11 +53,27 @@ public class Book {
         this.path = path;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 }

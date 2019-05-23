@@ -1,7 +1,7 @@
 package warehouse.interfaces;
 
 import warehouse.models.Author;
-import warehouse.models.Genre;
+import warehouse.models.Type;
 
 import java.util.List;
 
@@ -11,5 +11,5 @@ import java.util.List;
 public interface BookListener {
     void bookListChanged();
 
-    void bookListChanged(String searchValue, List<Genre> genres, List<Author> authors);
+    void bookListChanged(String searchValue, List<Type> types, List<Author> authors);
 }

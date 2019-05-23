@@ -4,11 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="170.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.AddGenreDialogController">
+<AnchorPane prefHeight="170.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.AddTypeDialogController">
    <children>
       <Button fx:id="addBtn" layoutX="180.0" layoutY="115.0" mnemonicParsing="false" text="Save" onAction="#addBtnClick"/>
       <Button fx:id="cancelBtn" layoutX="246.0" layoutY="115.0" mnemonicParsing="false" text="Cancel" onAction="#cancelBtnClick"/>
       <Label layoutX="42.0" layoutY="58.0" text="Genre:" />
-      <TextField fx:id="genreTextBox" layoutX="98.0" layoutY="53.0" prefHeight="31.0" prefWidth="212.0" />
+      <TextField fx:id="typeTextBox" layoutX="98.0" layoutY="53.0" prefHeight="31.0" prefWidth="212.0" />
    </children>
 </AnchorPane>

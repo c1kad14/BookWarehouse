@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import org.sqlite.SQLiteConfig;
 import warehouse.models.Author;
 import warehouse.models.Book;
-import warehouse.models.Genre;
+import warehouse.models.Type;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,9 +64,9 @@ public class SQLiteClient {
         return authors;
     }
 
-    public List<Genre> getGenres() {
+    public List<Type> getGenres() {
         ResultSet rs;
-        List<Genre> genres = new ArrayList<>();
+        List<Type> types = new ArrayList<>();
         try {
 
             SQLiteConfig config = new SQLiteConfig();
@@ -76,7 +76,7 @@ public class SQLiteClient {
             rs = stmt.executeQuery(SELECT_GENRES);
 
             while (rs.next()) {
-                genres.add(new Genre(rs.getInt(ID_FIELD), rs.getString(NAME_FIELD)));
+                types.add(new Type(rs.getInt(ID_FIELD), rs.getString(NAME_FIELD)));
             }
 
             //release resources
@@ -88,15 +88,15 @@ public class SQLiteClient {
             return null;
         }
 
-        return genres;
+        return types;
     }
 
-    public List<Book> getBooks(String searchValue, List<Genre> genres, List<Author> authors) {
+    public List<Book> getBooks(String searchValue, List<Type> types, List<Author> authors) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(SELECT_BOOKS);
 
-        if (genres.size() > 0 || authors.size() > 0 || !searchValue.isEmpty()) {
+        if (types.size() > 0 || authors.size() > 0 || !searchValue.isEmpty()) {
             stringBuilder.append(WHERE_CLAUSE);
 
             if (!searchValue.isEmpty()) {
@@ -105,21 +105,21 @@ public class SQLiteClient {
                 stringBuilder.append(")");
             }
 
-            if (genres.size() > 0 || authors.size() > 0) {
+            if (types.size() > 0 || authors.size() > 0) {
                 if (!searchValue.isEmpty()) {
                     stringBuilder.append(AND_CLAUSE);
                 }
                 stringBuilder.append("(");
 
-                for (int i = 0; i < genres.size(); i++) {
-                    stringBuilder.append(String.format(GENRES_ID_CLAUSE, genres.get(i).getId()));
+                for (int i = 0; i < types.size(); i++) {
+                    stringBuilder.append(String.format(GENRES_ID_CLAUSE, types.get(i).getId()));
 
-                    if (i != genres.size() - 1) {
+                    if (i != types.size() - 1) {
                         stringBuilder.append(OR_CLAUSE);
                     }
                 }
 
-                if (genres.size() > 0 && authors.size() > 0) {
+                if (types.size() > 0 && authors.size() > 0) {
                     stringBuilder.append(")");
                     stringBuilder.append(AND_CLAUSE);
                     stringBuilder.append("(");
@@ -148,10 +148,10 @@ public class SQLiteClient {
                 Book book = new Book();
                 book.setId(rs.getInt(ID_BOOK_FIELD));
                 book.setTitle(rs.getString(TITLE_FIELD));
-                book.setDescription(rs.getString(DESCRIPTION_FIELD));
+                book.setNotes(rs.getString(DESCRIPTION_FIELD));
                 book.setPath(rs.getString(PATH_FIELD));
                 book.setAuthor(new Author(rs.getInt(ID_AUTHOR_FIELD), rs.getString(FNAME_FIELD), rs.getString(LNAME_FIELD)));
-                book.setGenre(new Genre(rs.getInt(ID_GENRE_FIELD), rs.getString(GENRE_FIELD)));
+                book.setType(new Type(rs.getInt(ID_GENRE_FIELD), rs.getString(GENRE_FIELD)));
                 books.add(book);
             }
 
@@ -189,7 +189,7 @@ public class SQLiteClient {
         return author;
     }
 
-    public Genre addGenre(Genre genre) {
+    public Type addGenre(Type type) {
         try {
             //connect and create statement
             SQLiteConfig config = new SQLiteConfig();
@@ -197,7 +197,7 @@ public class SQLiteClient {
             connection = DriverManager.getConnection(SQLITE_JDBC_DB, config.toProperties());
 
             stmt = connection.createStatement();
-            stmt.executeUpdate(String.format(INSERT_GENRE, genre.getName()));
+            stmt.executeUpdate(String.format(INSERT_GENRE, type.getName()));
 
             //release resources
             stmt.close();
@@ -207,7 +207,7 @@ public class SQLiteClient {
             return null;
         }
 
-        return genre;
+        return type;
     }
 
     public Book addBook(Book book) {
@@ -219,7 +219,7 @@ public class SQLiteClient {
 
             stmt = connection.createStatement();
             stmt.executeUpdate(String.format(INSERT_BOOK,
-                    book.getTitle(), book.getDescription(), book.getPath(), book.getAuthor().getId(), book.getGenre().getId()));
+                    book.getTitle(), book.getNotes(), book.getPath(), book.getAuthor().getId(), book.getType().getId()));
 
             //release resources
             stmt.close();
@@ -232,7 +232,7 @@ public class SQLiteClient {
         return book;
     }
 
-    public boolean deleteGenre(Genre genre) throws MalformedURLException {
+    public boolean deleteGenre(Type type) throws MalformedURLException {
         try {
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
@@ -240,7 +240,7 @@ public class SQLiteClient {
 
             stmt = connection.createStatement();
             stmt.executeUpdate(String.format(DELETE_GENRE,
-                    genre.getId()));
+                    type.getId()));
 
             //release resources
             stmt.close();
@@ -254,7 +254,7 @@ public class SQLiteClient {
         return true;
     }
 
-    public Genre updateGenre(Genre genre) {
+    public Type updateGenre(Type type) {
         try {
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
@@ -262,7 +262,7 @@ public class SQLiteClient {
 
             stmt = connection.createStatement();
             stmt.executeUpdate(String.format(UPDATE_GENRE,
-                    genre.getName(), genre.getId()));
+                    type.getName(), type.getId()));
 
             //release resources
             stmt.close();
@@ -272,7 +272,7 @@ public class SQLiteClient {
             return null;
         }
 
-        return genre;
+        return type;
     }
 
     public boolean deleteAuthor(Author author) throws MalformedURLException {
@@ -327,8 +327,8 @@ public class SQLiteClient {
             connection = DriverManager.getConnection(SQLITE_JDBC_DB, config.toProperties());
 
             stmt = connection.createStatement();
-            stmt.executeUpdate(String.format(UPDATE_BOOK, book.getTitle(), book.getDescription(), book.getPath(),
-                    book.getAuthor().getId(), book.getGenre().getId(), book.getId()));
+            stmt.executeUpdate(String.format(UPDATE_BOOK, book.getTitle(), book.getNotes(), book.getPath(),
+                    book.getAuthor().getId(), book.getType().getId(), book.getId()));
 
             //release resources
             stmt.close();

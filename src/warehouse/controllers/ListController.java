@@ -13,7 +13,7 @@ import warehouse.data.SQLiteClient;
 import warehouse.interfaces.BookListener;
 import warehouse.models.Author;
 import warehouse.models.Book;
-import warehouse.models.Genre;
+import warehouse.models.Type;
 
 import java.awt.*;
 import java.io.File;
@@ -28,7 +28,7 @@ import static warehouse.constants.StringConstants.*;
  */
 public class ListController implements BookListener {
     public TableView booksView;
-    public List<Genre> genres;
+    public List<Type> types;
     public List<Author> authors;
 
     public TableColumn titleColumn;
@@ -45,7 +45,7 @@ public class ListController implements BookListener {
     public void initialize() {
         client = new SQLiteClient();
         List<Book> bl = client.getBooks("", new ArrayList<>(), new ArrayList<>());
-        genres = new ArrayList<>();
+        types = new ArrayList<>();
         authors = new ArrayList<>();
         searchValue = EMPTY_STRING;
 
@@ -60,16 +60,16 @@ public class ListController implements BookListener {
     @Override
     public void bookListChanged() {
         booksView.setItems(FXCollections.observableArrayList(
-                client.getBooks(this.searchValue, this.genres, this.authors)));
+                client.getBooks(this.searchValue, this.types, this.authors)));
     }
 
     @Override
-    public void bookListChanged(String searchValue, List<Genre> genres, List<Author> authors) {
+    public void bookListChanged(String searchValue, List<Type> types, List<Author> authors) {
         this.searchValue = searchValue;
-        this.genres = genres;
+        this.types = types;
         this.authors = authors;
 
-        booksView.setItems(FXCollections.observableArrayList(client.getBooks(searchValue, genres, authors)));
+        booksView.setItems(FXCollections.observableArrayList(client.getBooks(searchValue, types, authors)));
     }
 
     private Callback<TableColumn<Book, Void>, TableCell<Book, Void>> initActionButton() {

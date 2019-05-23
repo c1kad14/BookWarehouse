@@ -18,7 +18,7 @@ public class StringConstants {
     public static final String DELETE_FIELD = "Delete";
     public static final String TITLE_FIELD = "Title";
     public static final String AUTHOR_FIELD = "Author";
-    public static final String GENRE_FIELD = "Genre";
+    public static final String GENRE_FIELD = "Type";
     public static final String DESCRIPTION_FIELD = "Description";
     public static final String PATH_FIELD = "Path";
     public static final String EMPTY_STRING = "";
