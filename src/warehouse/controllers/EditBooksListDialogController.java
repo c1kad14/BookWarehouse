@@ -35,7 +35,7 @@ public class EditBooksListDialogController {
     public TableColumn idColumn;
     public TableColumn titleColumn;
     public TableColumn authorColumn;
-    public TableColumn genreColumn;
+    public TableColumn typeColumn;
     public TableColumn editColumn;
     public TableColumn deleteColumn;
     public Button closeBtn;
@@ -51,7 +51,7 @@ public class EditBooksListDialogController {
         idColumn.setCellValueFactory(new PropertyValueFactory<>(ID_FIELD));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>(TITLE_FIELD));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>(AUTHOR_FIELD));
-        genreColumn.setCellValueFactory(new PropertyValueFactory<>(GENRE_FIELD));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>(TYPE_FIELD));
         descColumn.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION_FIELD));
         editColumn.setCellFactory(getEditButton());
         deleteColumn.setCellFactory(getDeleteButton());
@@ -128,7 +128,7 @@ public class EditBooksListDialogController {
                             EditBookDialogController editBookDialogController = bookDialogLoader.getController();
                             editBookDialogController.setBook(book);
 
-                            Scene scene = new Scene(editBookDialog, 372, 524);
+                            Scene scene = new Scene(editBookDialog, 372, 624);
                             Stage stage = new Stage();
 
                             stage.setTitle("Edit book");

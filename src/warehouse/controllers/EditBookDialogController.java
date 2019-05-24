@@ -24,13 +24,15 @@ import static warehouse.constants.StringConstants.SELECT_FILE_LABEL_TEXT;
  */
 public class EditBookDialogController {
     public ComboBox authorsComboBox;
-    public ComboBox genresComboBox;
+    public ComboBox typesComboBox;
     public TextField idTextBox;
     public TextField titleTextBox;
     public TextArea descTextBox;
     public Button saveBtn;
     public Button closeBtn;
     public Label selectedFileLabel;
+    public TextField publisherTextBox;
+    public TextField yearTextBox;
     private SQLiteClient client;
     private Book book;
     private ObservableList<Author> authors;
@@ -42,14 +44,14 @@ public class EditBookDialogController {
     public void initialize() {
         client = new SQLiteClient();
         authors = FXCollections.observableArrayList(client.getAuthors());
-        types = FXCollections.observableArrayList(client.getGenres());
+        types = FXCollections.observableArrayList(client.getTypes());
 
         selectedFileLabel.setText(SELECT_FILE_LABEL_TEXT);
 
         fileChooser = new FileChooser();
         titleTextBox.textProperty().addListener((observable, oldValue, newValue) -> shouldSaveButtonBeEnabled());
 
-        genresComboBox.setItems(FXCollections.observableArrayList(types));
+        typesComboBox.setItems(FXCollections.observableArrayList(types));
         authorsComboBox.setItems(FXCollections.observableArrayList(authors));
 
         shouldSaveButtonBeEnabled();
@@ -62,28 +64,34 @@ public class EditBookDialogController {
         this.selectedPath = this.book.getPath();
         this.selectedFileLabel.setText(new File(this.book.getPath()).getName());
         this.descTextBox.setText(this.book.getNotes());
+        this.publisherTextBox.setText(this.book.getPublisher());
+        this.yearTextBox.setText(this.book.getYear());
         this.authorsComboBox.getSelectionModel().select(authors.stream().filter(a -> a.getId() == this.book.getAuthor().getId()).findFirst().get());
-        this.genresComboBox.getSelectionModel().select(types.stream().filter(g -> g.getId() == this.book.getType().getId()).findFirst().get());
+        this.typesComboBox.getSelectionModel().select(types.stream().filter(g -> g.getId() == this.book.getType().getId()).findFirst().get());
     }
 
     public void saveBtnClick(ActionEvent actionEvent) {
         try {
-            //delete old directory
-            FileUtils.deleteDirectory(new File(book.getPath()).getParentFile());
+            if(!this.book.getPath().equals(selectedPath)) {
+                //delete old directory
+                FileUtils.deleteDirectory(new File(book.getPath()).getParentFile());
 
-            //copy new file
-            File file = new File(selectedPath);
-            File bookDirectory = new File(BOOK_WAREHOUSE_FOLDER + "//" + System.currentTimeMillis());
-            bookDirectory.mkdirs();
-            FileUtils.copyFileToDirectory(file, bookDirectory);
+                //copy new file
+                File file = new File(selectedPath);
+                File bookDirectory = new File(BOOK_WAREHOUSE_FOLDER + "//" + System.currentTimeMillis());
+                bookDirectory.mkdirs();
+                FileUtils.copyFileToDirectory(file, bookDirectory);
+                this.book.setPath(bookDirectory.getPath() + "//" + file.getName());
+            }
 
             this.book.setTitle(this.titleTextBox.getText());
             this.book.setNotes(this.descTextBox.getText());
+            this.book.setPublisher(this.publisherTextBox.getText());
+            this.book.setYear(this.yearTextBox.getText());
             this.book.setType(this.types.stream().filter(g ->
-                    g.getName().equals(genresComboBox.getSelectionModel().getSelectedItem().toString())).findFirst().get());
+                    g.getName().equals(typesComboBox.getSelectionModel().getSelectedItem().toString())).findFirst().get());
             this.book.setAuthor(this.authors.stream().filter(a ->
                     a.toString().equals(authorsComboBox.getSelectionModel().getSelectedItem().toString())).findFirst().get());
-            this.book.setPath(bookDirectory.getPath() + "//" + file.getName());
 
             client.updateBook(this.book);
         } catch (IOException e) {

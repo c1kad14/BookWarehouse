@@ -46,7 +46,7 @@ public class AddBookDialogController {
         client = new SQLiteClient();
         selectedFileLabel.setText(SELECT_FILE_LABEL_TEXT);
 
-        types = client.getGenres();
+        types = client.getTypes();
         authors = client.getAuthors();
 
         fileChooser = new FileChooser();

@@ -19,10 +19,10 @@ import java.net.MalformedURLException;
 public class MenuController {
     public MenuItem addAuthorMenuItem;
     public MenuItem addBookMenuItem;
-    public MenuItem addGenreMenuItem;
+    public MenuItem addTypeMenuItem;
     public MenuItem editAuthorsMenuItem;
     public MenuItem editBooksMenuItem;
-    public MenuItem editGenresMenuItem;
+    public MenuItem editTypesMenuItem;
     public MenuItem aboutMenuItem;
     private ListController listController;
 
@@ -66,7 +66,7 @@ public class MenuController {
         listController.bookListChanged();
     }
 
-    public void addGenreMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
+    public void addTypeMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
             dialog = FXMLLoader.load(getClass().getResource("../ui/addTypeDialog.fxml"));
@@ -75,7 +75,7 @@ public class MenuController {
         }
         Scene scene = new Scene(dialog, 350, 170);
         Stage stage = new Stage();
-        stage.setTitle("Add new genre");
+        stage.setTitle("Add new type");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
@@ -103,16 +103,16 @@ public class MenuController {
         listController.bookListChanged();
     }
 
-    public void editGenresMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
+    public void editTypesMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
-            dialog = FXMLLoader.load(getClass().getResource("../ui/editGenresListDialog.fxml"));
+            dialog = FXMLLoader.load(getClass().getResource("../ui/editTypesListDialog.fxml"));
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         Scene scene = new Scene(dialog, 568, 383);
         Stage stage = new Stage();
-        stage.setTitle("Edit Genres");
+        stage.setTitle("Edit Types");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));

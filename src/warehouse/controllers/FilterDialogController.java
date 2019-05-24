@@ -23,12 +23,12 @@ public class FilterDialogController {
     public GridPane pane;
     public Button applyBtn;
     public Button resetBtn;
-    public Label genresLabel;
+    public Label typesLabel;
     public Label authorsLabel;
     private SQLiteClient client;
     private int maxRow;
 
-    public List<CheckBox> genresCheckBoxesList;
+    public List<CheckBox> typesCheckBoxesList;
     public ObservableList<Type> types;
     public ObservableList<Author> authors;
 
@@ -41,7 +41,7 @@ public class FilterDialogController {
     public void initialize() {
         client = new SQLiteClient();
 
-        types = FXCollections.observableArrayList(client.getGenres());
+        types = FXCollections.observableArrayList(client.getTypes());
         authors = FXCollections.observableArrayList(client.getAuthors());
 
         selectedTypes = new ArrayList<>();
@@ -49,23 +49,23 @@ public class FilterDialogController {
 
         maxRow = types.size() > authors.size() ? types.size() : authors.size();
 
-        genresCheckBoxesList = new ArrayList<>();
+        typesCheckBoxesList = new ArrayList<>();
 
-        types.forEach(g -> genresCheckBoxesList.add(new CheckBox(g.toString())));
+        types.forEach(g -> typesCheckBoxesList.add(new CheckBox(g.toString())));
 
-        positionGenres();
+        positionTypes();
         authorsMenuItemsInit();
 
-        pane.getChildren().addAll(genresCheckBoxesList);
+        pane.getChildren().addAll(typesCheckBoxesList);
         pane.getChildren().addAll(authorsButton);
-        pane.getChildren().addAll(authorsLabel, genresLabel);
+        pane.getChildren().addAll(authorsLabel, typesLabel);
 
         GridPane.setConstraints(applyBtn, 0, maxRow + 1);
         GridPane.setConstraints(resetBtn, 1, maxRow + 1);
     }
 
     public void resetBtnClick(ActionEvent actionEvent) {
-        genresCheckBoxesList.forEach(g -> g.setSelected(false));
+        typesCheckBoxesList.forEach(g -> g.setSelected(false));
         authorsButton.getItems().forEach(i -> ((CheckMenuItem) i).setSelected(false));
 
         selectedTypes = new ArrayList<>();
@@ -91,28 +91,28 @@ public class FilterDialogController {
         initSelections();
     }
 
-    private void positionGenres() {
+    private void positionTypes() {
         this.pane.setPadding(new Insets(5, 5, 5, 5));
         this.pane.setVgap(10);
         this.pane.setHgap(5);
         this.pane.setAlignment(Pos.CENTER);
 
-        genresLabel = new Label("Genres: ");
+        typesLabel = new Label("Types: ");
         authorsLabel = new Label("Authors: ");
 
-        GridPane.setConstraints(genresLabel, 0, 0);
+        GridPane.setConstraints(typesLabel, 0, 0);
         GridPane.setConstraints(authorsLabel, 0, types.size() / 3 + 2);
 
-        for (int i = 0; i < genresCheckBoxesList.size(); i++) {
-            CheckBox genreCheckBox = genresCheckBoxesList.get(i);
-            genreCheckBox.setOnAction(event -> {
-                if (genreCheckBox.isSelected()) {
-                    selectedTypes.add(types.stream().filter(g -> g.toString().equals(genreCheckBox.getText())).findFirst().get());
+        for (int i = 0; i < typesCheckBoxesList.size(); i++) {
+            CheckBox typeCheckBox = typesCheckBoxesList.get(i);
+            typeCheckBox.setOnAction(event -> {
+                if (typeCheckBox.isSelected()) {
+                    selectedTypes.add(types.stream().filter(g -> g.toString().equals(typeCheckBox.getText())).findFirst().get());
                 } else {
-                    selectedTypes.removeIf(sg -> sg.getId() == types.stream().filter(g -> g.toString().equals(genreCheckBox.getText())).findFirst().get().getId());
+                    selectedTypes.removeIf(sg -> sg.getId() == types.stream().filter(g -> g.toString().equals(typeCheckBox.getText())).findFirst().get().getId());
                 }
             });
-            GridPane.setConstraints(genresCheckBoxesList.get(i), i % 3, i / 3 + 1);
+            GridPane.setConstraints(typesCheckBoxesList.get(i), i % 3, i / 3 + 1);
         }
     }
 
@@ -138,7 +138,7 @@ public class FilterDialogController {
      * Method that inits controls with existing selections
      */
     private void initSelections() {
-        selectedTypes.forEach(sg -> genresCheckBoxesList.stream().filter(gcb ->
+        selectedTypes.forEach(sg -> typesCheckBoxesList.stream().filter(gcb ->
                 gcb.getText().equals(sg.getName())).findFirst().get().setSelected(true));
 
         selectedAuthors.forEach(sa -> ((CheckMenuItem) authorsButton.getItems().stream().filter(item ->

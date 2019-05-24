@@ -4,12 +4,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.ListController">
     <children>
-        <TableView fx:id="booksView" layoutX="19.0" layoutY="24.0" prefHeight="344.0" prefWidth="571.0">
+        <TableView fx:id="booksView" layoutX="19.0" layoutY="24.0" prefHeight="440.0" prefWidth="771.0">
             <columns>
                 <TableColumn fx:id="titleColumn" prefWidth="111.0" text="Title" />
                 <TableColumn fx:id="authorColumn" prefWidth="144.0" text="Author" />
-                <TableColumn fx:id="genreColumn" prefWidth="71.0" text="Genre" />
-                <TableColumn fx:id="descColumn" prefWidth="172.0" text="Description" />
+                <TableColumn fx:id="typeColumn" prefWidth="71.0" text="Type" />
+                <TableColumn fx:id="descColumn" prefWidth="200.0" text="Description" />
+                <TableColumn fx:id="yearColumn" prefWidth="72.0" text="Year" />
+                <TableColumn fx:id="publisherColumn" prefWidth="100.0" text="Publisher" />
                 <TableColumn fx:id="actionColumn" prefWidth="71.0" text="Action" />
             </columns>
         </TableView>

@@ -42,7 +42,7 @@ public class Main extends Application {
         root.add(list, 0, 4);
 
         primaryStage.setTitle("Book Warehouse");
-        primaryStage.setScene(new Scene(root, 600, 500));
+        primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.setResizable(false);
         primaryStage.getIcons().add(new Image(new File(System.getProperty("user.dir") + "//logo.png").toURI().toURL().toString(), false));
         primaryStage.show();

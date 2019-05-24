@@ -25,7 +25,6 @@ import static warehouse.constants.StringConstants.*;
  * Class responsible for database connection and retrieving records
  */
 public class SQLiteClient {
-
     Connection connection = null;
     Statement stmt = null;
 
@@ -64,16 +63,16 @@ public class SQLiteClient {
         return authors;
     }
 
-    public List<Type> getGenres() {
+    public List<Type> getTypes() {
         ResultSet rs;
         List<Type> types = new ArrayList<>();
         try {
-
+            //connect and create statement
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
             connection = DriverManager.getConnection(SQLITE_JDBC_DB, config.toProperties());
             stmt = connection.createStatement();
-            rs = stmt.executeQuery(SELECT_GENRES);
+            rs = stmt.executeQuery(SELECT_TYPES);
 
             while (rs.next()) {
                 types.add(new Type(rs.getInt(ID_FIELD), rs.getString(NAME_FIELD)));
@@ -93,15 +92,15 @@ public class SQLiteClient {
 
     public List<Book> getBooks(String searchValue, List<Type> types, List<Author> authors) {
         StringBuilder stringBuilder = new StringBuilder();
-
         stringBuilder.append(SELECT_BOOKS);
 
+        //generate query
         if (types.size() > 0 || authors.size() > 0 || !searchValue.isEmpty()) {
             stringBuilder.append(WHERE_CLAUSE);
 
             if (!searchValue.isEmpty()) {
                 stringBuilder.append("(");
-                stringBuilder.append(String.format(SEARCH_CLAUSE, searchValue, searchValue, searchValue));
+                stringBuilder.append(String.format(SEARCH_CLAUSE, searchValue, searchValue, searchValue, searchValue));
                 stringBuilder.append(")");
             }
 
@@ -112,7 +111,7 @@ public class SQLiteClient {
                 stringBuilder.append("(");
 
                 for (int i = 0; i < types.size(); i++) {
-                    stringBuilder.append(String.format(GENRES_ID_CLAUSE, types.get(i).getId()));
+                    stringBuilder.append(String.format(TYPES_ID_CLAUSE, types.get(i).getId()));
 
                     if (i != types.size() - 1) {
                         stringBuilder.append(OR_CLAUSE);
@@ -150,8 +149,10 @@ public class SQLiteClient {
                 book.setTitle(rs.getString(TITLE_FIELD));
                 book.setNotes(rs.getString(DESCRIPTION_FIELD));
                 book.setPath(rs.getString(PATH_FIELD));
+                book.setYear(rs.getString(YEAR_FIELD));
+                book.setPublisher(rs.getString(PUBLISHER_FIELD));
                 book.setAuthor(new Author(rs.getInt(ID_AUTHOR_FIELD), rs.getString(FNAME_FIELD), rs.getString(LNAME_FIELD)));
-                book.setType(new Type(rs.getInt(ID_GENRE_FIELD), rs.getString(GENRE_FIELD)));
+                book.setType(new Type(rs.getInt(ID_TYPE_FIELD), rs.getString(TYPE_FIELD)));
                 books.add(book);
             }
 
@@ -170,6 +171,7 @@ public class SQLiteClient {
 
     public Author addAuthor(Author author) {
         try {
+            //connect and create statement
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
             connection = DriverManager.getConnection(SQLITE_JDBC_DB, config.toProperties());
@@ -189,7 +191,7 @@ public class SQLiteClient {
         return author;
     }
 
-    public Type addGenre(Type type) {
+    public Type addType(Type type) {
         try {
             //connect and create statement
             SQLiteConfig config = new SQLiteConfig();
@@ -197,7 +199,7 @@ public class SQLiteClient {
             connection = DriverManager.getConnection(SQLITE_JDBC_DB, config.toProperties());
 
             stmt = connection.createStatement();
-            stmt.executeUpdate(String.format(INSERT_GENRE, type.getName()));
+            stmt.executeUpdate(String.format(INSERT_TYPE, type.getName()));
 
             //release resources
             stmt.close();
@@ -219,7 +221,8 @@ public class SQLiteClient {
 
             stmt = connection.createStatement();
             stmt.executeUpdate(String.format(INSERT_BOOK,
-                    book.getTitle(), book.getNotes(), book.getPath(), book.getAuthor().getId(), book.getType().getId()));
+                    book.getTitle(), book.getNotes(), book.getPath(), book.getYear(), book.getPublisher(),
+                    book.getAuthor().getId(), book.getType().getId()));
 
             //release resources
             stmt.close();
@@ -232,14 +235,15 @@ public class SQLiteClient {
         return book;
     }
 
-    public boolean deleteGenre(Type type) throws MalformedURLException {
+    public boolean deleteType(Type type) throws MalformedURLException {
         try {
+            //connect and create statement
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
             connection = DriverManager.getConnection(SQLITE_JDBC_DB, config.toProperties());
 
             stmt = connection.createStatement();
-            stmt.executeUpdate(String.format(DELETE_GENRE,
+            stmt.executeUpdate(String.format(DELETE_TYPE,
                     type.getId()));
 
             //release resources
@@ -254,14 +258,15 @@ public class SQLiteClient {
         return true;
     }
 
-    public Type updateGenre(Type type) {
+    public Type updateType(Type type) {
         try {
+            //connect and create statement
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
             connection = DriverManager.getConnection(SQLITE_JDBC_DB, config.toProperties());
 
             stmt = connection.createStatement();
-            stmt.executeUpdate(String.format(UPDATE_GENRE,
+            stmt.executeUpdate(String.format(UPDATE_TYPE,
                     type.getName(), type.getId()));
 
             //release resources
@@ -277,6 +282,7 @@ public class SQLiteClient {
 
     public boolean deleteAuthor(Author author) throws MalformedURLException {
         try {
+            //connect and create statement
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
             connection = DriverManager.getConnection(SQLITE_JDBC_DB, config.toProperties());
@@ -299,7 +305,7 @@ public class SQLiteClient {
 
     public Author updateAuthor(Author author) {
         try {
-
+            //connect and create statement
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
             connection = DriverManager.getConnection(SQLITE_JDBC_DB, config.toProperties());
@@ -321,14 +327,14 @@ public class SQLiteClient {
 
     public Book updateBook(Book book) {
         try {
-
+            //connect and create statement
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
             connection = DriverManager.getConnection(SQLITE_JDBC_DB, config.toProperties());
 
             stmt = connection.createStatement();
             stmt.executeUpdate(String.format(UPDATE_BOOK, book.getTitle(), book.getNotes(), book.getPath(),
-                    book.getAuthor().getId(), book.getType().getId(), book.getId()));
+                    book.getYear(), book.getPublisher(), book.getAuthor().getId(), book.getType().getId(), book.getId()));
 
             //release resources
             stmt.close();
@@ -343,7 +349,7 @@ public class SQLiteClient {
 
     public boolean deleteBook(Book book) {
         try {
-
+            //connect and create statement
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
             connection = DriverManager.getConnection(SQLITE_JDBC_DB, config.toProperties());

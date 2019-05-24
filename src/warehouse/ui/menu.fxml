@@ -13,14 +13,14 @@
                 <items>
                     <MenuItem fx:id="addAuthorMenuItem" text="Author" onAction="#addAuthorMenuItemClick"/>
                     <MenuItem fx:id="addBookMenuItem" text="Book" onAction="#addBookMenuItemClick"/>
-                    <MenuItem fx:id="addGenreMenuItem" text="Genre" onAction="#addGenreMenuItemClick"/>
+                    <MenuItem fx:id="addTypeMenuItem" text="Type" onAction="#addTypeMenuItemClick"/>
                 </items>
             </Menu>
             <Menu text="Edit">
                 <items>
                     <MenuItem fx:id="editAuthorsMenuItem" text="Authors" onAction="#editAuthorsMenuItemClick"/>
                     <MenuItem fx:id="editBooksMenuItem" text="Books" onAction="#editBooksMenuItemClick"/>
-                    <MenuItem fx:id="editGenresMenuItem" text="Genres" onAction="#editGenresMenuItemClick"/>
+                    <MenuItem fx:id="editTypesMenuItem" text="Types" onAction="#editTypesMenuItemClick"/>
                 </items>
             </Menu>
             <Menu text="Help">

@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-
-<AnchorPane prefHeight="524.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.EditBookDialogController">
+<AnchorPane prefHeight="688.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="warehouse.controllers.EditBookDialogController">
     <children>
-        <Label layoutX="100.0" layoutY="53.0" text="Id: " />
-        <Label layoutX="86.0" layoutY="93.0" text="Title: " />
-        <Label layoutX="69.0" layoutY="133.0" text="Author: " />
-        <Label layoutX="74.0" layoutY="172.0" text="Genre: " />
-        <Label layoutX="41.0" layoutY="209.0" text="Description:" />
-        <ComboBox fx:id="authorsComboBox" layoutX="139.0" layoutY="126.0" prefHeight="31.0" prefWidth="187.0" />
-        <ComboBox fx:id="genresComboBox" layoutX="139.0" layoutY="168.0" prefHeight="31.0" prefWidth="187.0" />
-        <TextField fx:id="idTextBox" disable="true" layoutX="139.0" layoutY="46.0" />
-        <TextField fx:id="titleTextBox" layoutX="139.0" layoutY="86.0" />
-        <TextArea fx:id="descTextBox" layoutX="139.0" layoutY="215.0" prefHeight="145.0" prefWidth="187.0" />
-        <Label fx:id="selectedFileLabel" layoutX="140.0" layoutY="386.0" prefHeight="21.0" prefWidth="187.0" />
-        <Button fx:id="selectFileBtn" layoutX="39.0" layoutY="380.0" mnemonicParsing="false" onAction="#selectFileBtnClick" prefHeight="31.0" prefWidth="86.0" text="Select file" />
+        <Label layoutX="101.0" layoutY="53.0" text="Id: "/>
+        <Label layoutX="85.0" layoutY="98.0" text="Title: "/>
+        <Label layoutX="67.0" layoutY="139.0" text="Author: "/>
+        <Label layoutX="80.0" layoutY="189.0" text="Type: "/>
+        <Label layoutX="37.0" layoutY="338.0" text="Description:"/>
+        <ComboBox fx:id="authorsComboBox" layoutX="139.0" layoutY="141.0" prefHeight="31.0" prefWidth="187.0"/>
+        <ComboBox fx:id="typesComboBox" layoutX="139.0" layoutY="189.0" prefHeight="31.0" prefWidth="187.0"/>
+        <TextField fx:id="idTextBox" disable="true" layoutX="139.0" layoutY="46.0"/>
+        <TextField fx:id="titleTextBox" layoutX="139.0" layoutY="93.0"/>
+        <TextArea fx:id="descTextBox" layoutX="139.0" layoutY="338.0" prefHeight="145.0" prefWidth="187.0"/>
+        <Label fx:id="selectedFileLabel" layoutX="139.0" layoutY="508.0" prefHeight="21.0" prefWidth="187.0"/>
+        <Button fx:id="selectFileBtn" layoutX="43.0" layoutY="503.0" mnemonicParsing="false"
+                onAction="#selectFileBtnClick" prefHeight="31.0" prefWidth="86.0" text="Select file"/>
 
-        <Button fx:id="saveBtn" layoutX="180.0" layoutY="444.0" mnemonicParsing="false" onAction="#saveBtnClick" prefHeight="31.0" prefWidth="65.0" text="Save" />
-        <Button fx:id="closeBtn" layoutX="261.0" layoutY="443.0" mnemonicParsing="false" onAction="#closeBtnClick" prefHeight="31.0" prefWidth="65.0" text="Close" />
+        <Button fx:id="saveBtn" layoutX="180.0" layoutY="546.0" mnemonicParsing="false" onAction="#saveBtnClick"
+                prefHeight="31.0" prefWidth="65.0" text="Save"/>
+        <Button fx:id="closeBtn" layoutX="261.0" layoutY="546.0" mnemonicParsing="false" onAction="#closeBtnClick"
+                prefHeight="31.0" prefWidth="65.0" text="Close"/>
+        <Label layoutX="51.0" layoutY="242.0" text="Publisher:"/>
+        <Label layoutX="82.0" layoutY="289.0" text="Year: "/>
+        <TextField fx:id="publisherTextBox" layoutX="139.0" layoutY="238.0"/>
+        <TextField fx:id="yearTextBox" layoutX="139.0" layoutY="286.0"/>
     </children>
 </AnchorPane>

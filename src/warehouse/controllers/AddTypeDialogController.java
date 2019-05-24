@@ -28,7 +28,7 @@ public class AddTypeDialogController {
     }
 
     public void addBtnClick(ActionEvent actionEvent) {
-        client.addGenre(new Type(typeTextBox.getText()));
+        client.addType(new Type(typeTextBox.getText()));
         close();
     }
 

@@ -2,12 +2,12 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="383.0" prefWidth="568.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.EditGenresListDialogController">
+<AnchorPane prefHeight="383.0" prefWidth="568.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.EditTypesListDialogController">
     <children>
-        <TableView fx:id="genresView" layoutX="40.0" layoutY="91.0" prefHeight="200.0" prefWidth="500.0">
+        <TableView fx:id="typesView" layoutX="40.0" layoutY="91.0" prefHeight="200.0" prefWidth="500.0">
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="50.0" text="Id" />
-                <TableColumn fx:id="genreColumn" prefWidth="228.0" text="Genre" />
+                <TableColumn fx:id="typeColumn" prefWidth="228.0" text="Type" />
                 <TableColumn fx:id="editColumn" prefWidth="115.0" text="Edit" />
                 <TableColumn fx:id="deleteColumn" prefWidth="84.0" text="Delete" />
             </columns>

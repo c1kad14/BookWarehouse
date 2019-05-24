@@ -11,9 +11,9 @@ import warehouse.models.Type;
 /**
  * Controller class for Edit Type Dialog
  */
-public class EditGenreDialogController {
+public class EditTypeDialogController {
     public TextField idTextBox;
-    public TextField genreTextBox;
+    public TextField typeTextBox;
     public Button closeBtn;
     public Button saveBtn;
     private SQLiteClient client;
@@ -27,12 +27,12 @@ public class EditGenreDialogController {
     public void setType(Type type) {
         this.type = type;
         this.idTextBox.setText(String.valueOf(this.type.getId()));
-        this.genreTextBox.setText(this.type.getName());
+        this.typeTextBox.setText(this.type.getName());
     }
 
     public void saveBtnClick(ActionEvent actionEvent) {
-        type.setName(genreTextBox.getText());
-        Type result = client.updateGenre(type);
+        type.setName(typeTextBox.getText());
+        Type result = client.updateType(type);
 
         System.out.println(result);
 

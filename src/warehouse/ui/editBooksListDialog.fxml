@@ -9,7 +9,7 @@
                 <TableColumn fx:id="idColumn" prefWidth="33.0" text="Id" />
                 <TableColumn fx:id="titleColumn" prefWidth="98.0" text="Title" />
                 <TableColumn fx:id="authorColumn" prefWidth="106.0" text="Author" />
-                <TableColumn fx:id="genreColumn" prefWidth="102.0" text="Genre" />
+                <TableColumn fx:id="typeColumn" prefWidth="102.0" text="Type" />
                 <TableColumn fx:id="descColumn" prefWidth="102.0" text="Description" />
                 <TableColumn fx:id="editColumn" prefWidth="74.0" text="Edit" />
                 <TableColumn fx:id="deleteColumn" prefWidth="77.0" text="Delete" />

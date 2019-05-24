@@ -26,29 +26,29 @@ import java.net.MalformedURLException;
 import static warehouse.constants.StringConstants.*;
 
 /**
- * Controller class for Edit Genres Dialog
+ * Controller class for Edit Types Dialog
  */
-public class EditGenresListDialogController {
-    public TableView genresView;
+public class EditTypesListDialogController {
+    public TableView typesView;
     public TableColumn idColumn;
-    public TableColumn genreColumn;
+    public TableColumn typeColumn;
     public TableColumn editColumn;
     public TableColumn deleteColumn;
-    private ObservableList<Type> genresList;
+    private ObservableList<Type> typesList;
     public Button closeBtn;
     private SQLiteClient client;
 
     @FXML
     public void initialize() {
         client = new SQLiteClient();
-        genresList = FXCollections.observableArrayList(client.getGenres());
+        typesList = FXCollections.observableArrayList(client.getTypes());
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>(ID_FIELD));
-        genreColumn.setCellValueFactory(new PropertyValueFactory<>(NAME_FIELD));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>(NAME_FIELD));
         editColumn.setCellFactory(getEditButton());
         deleteColumn.setCellFactory(getDeleteButton());
 
-        genresView.setItems(genresList);
+        typesView.setItems(typesList);
     }
 
     public void closeBtnClick(ActionEvent actionEvent) {
@@ -70,14 +70,14 @@ public class EditGenresListDialogController {
                             //Call edit dialog open
                             boolean result = false;
                             try {
-                                result = client.deleteGenre(type);
+                                result = client.deleteType(type);
                             } catch (MalformedURLException e) {
                                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
                             System.out.println(result);
 
-                            genresList = FXCollections.observableArrayList(client.getGenres());
-                            genresView.setItems(genresList);
+                            typesList = FXCollections.observableArrayList(client.getTypes());
+                            typesView.setItems(typesList);
                         });
                     }
 
@@ -108,17 +108,17 @@ public class EditGenresListDialogController {
                         btn.setOnAction((ActionEvent event) -> {
                             Type type = getTableView().getItems().get(getIndex());
 
-                            FXMLLoader genreDialogLoader = new FXMLLoader(getClass().getResource("../ui/editGenreDialog.fxml"));
-                            Parent editGenreDialog = null;
+                            FXMLLoader typeDialogLoader = new FXMLLoader(getClass().getResource("../ui/editTypeDialog.fxml"));
+                            Parent editTypeDialog = null;
                             try {
-                                editGenreDialog = genreDialogLoader.load();
+                                editTypeDialog = typeDialogLoader.load();
                             } catch (IOException e) {
                                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
-                            EditGenreDialogController editGenreDialogController = genreDialogLoader.getController();
-                            editGenreDialogController.setType(type);
+                            EditTypeDialogController editTypeDialogController = typeDialogLoader.getController();
+                            editTypeDialogController.setType(type);
 
-                            Scene scene = new Scene(editGenreDialog, 331, 247);
+                            Scene scene = new Scene(editTypeDialog, 331, 247);
                             Stage stage = new Stage();
 
                             stage.setTitle("Edit type");
@@ -132,8 +132,8 @@ public class EditGenresListDialogController {
                             stage.setScene(scene);
                             stage.showAndWait();
 
-                            genresList = FXCollections.observableArrayList(client.getGenres());
-                            genresView.setItems(genresList);
+                            typesList = FXCollections.observableArrayList(client.getTypes());
+                            typesView.setItems(typesList);
                         });
                     }
 
