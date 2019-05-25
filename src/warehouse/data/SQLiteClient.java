@@ -147,7 +147,7 @@ public class SQLiteClient {
                 Book book = new Book();
                 book.setId(rs.getInt(ID_BOOK_FIELD));
                 book.setTitle(rs.getString(TITLE_FIELD));
-                book.setNotes(rs.getString(DESCRIPTION_FIELD));
+                book.setNotes(rs.getString(NOTES_FIELD));
                 book.setPath(rs.getString(PATH_FIELD));
                 book.setYear(rs.getString(YEAR_FIELD));
                 book.setPublisher(rs.getString(PUBLISHER_FIELD));

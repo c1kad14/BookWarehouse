@@ -54,7 +54,7 @@ public class MenuController {
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        Scene scene = new Scene(dialog, 400, 400);
+        Scene scene = new Scene(dialog, 400, 475);
         Stage stage = new Stage();
         stage.setTitle("Add new book");
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -90,7 +90,7 @@ public class MenuController {
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        Scene scene = new Scene(dialog, 568, 400);
+        Scene scene = new Scene(dialog, 575, 354);
         Stage stage = new Stage();
         stage.setTitle("Edit Authors");
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -110,7 +110,7 @@ public class MenuController {
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        Scene scene = new Scene(dialog, 568, 383);
+        Scene scene = new Scene(dialog, 535, 375);
         Stage stage = new Stage();
         stage.setTitle("Edit Types");
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -129,7 +129,7 @@ public class MenuController {
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        Scene scene = new Scene(dialog, 662, 326);
+        Scene scene = new Scene(dialog, 854, 475);
         Stage stage = new Stage();
         stage.setTitle("Edit Books");
         stage.initModality(Modality.APPLICATION_MODAL);

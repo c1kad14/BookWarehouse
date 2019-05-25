@@ -68,13 +68,11 @@ public class EditTypesListDialogController {
                             Type type = getTableView().getItems().get(getIndex());
 
                             //Call edit dialog open
-                            boolean result = false;
                             try {
-                                result = client.deleteType(type);
+                                client.deleteType(type);
                             } catch (MalformedURLException e) {
                                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
-                            System.out.println(result);
 
                             typesList = FXCollections.observableArrayList(client.getTypes());
                             typesView.setItems(typesList);
@@ -152,6 +150,8 @@ public class EditTypesListDialogController {
         };
     }
 
-    private void close() { ((Stage) closeBtn.getScene().getWindow()).close(); }
+    private void close() {
+        ((Stage) closeBtn.getScene().getWindow()).close();
+    }
 
 }

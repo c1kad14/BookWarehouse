@@ -57,11 +57,11 @@ public class FilterDialogController {
         authorsMenuItemsInit();
 
         pane.getChildren().addAll(typesCheckBoxesList);
-        pane.getChildren().addAll(authorsButton);
+        pane.getChildren().add(authorsButton);
         pane.getChildren().addAll(authorsLabel, typesLabel);
 
-        GridPane.setConstraints(applyBtn, 0, maxRow + 1);
-        GridPane.setConstraints(resetBtn, 1, maxRow + 1);
+        GridPane.setConstraints(applyBtn, 0, maxRow);
+        GridPane.setConstraints(resetBtn, 1, maxRow);
     }
 
     public void resetBtnClick(ActionEvent actionEvent) {
@@ -119,7 +119,7 @@ public class FilterDialogController {
     private void authorsMenuItemsInit() {
         authorsButton = new MenuButton("Select authors");
         authors.stream().map(a -> a.toString()).map(CheckMenuItem::new).forEach(authorsButton.getItems()::add);
-        authorsButton.setPrefWidth(150);
+        authorsButton.setPrefWidth(250);
 
         authorsButton.getItems().forEach(i -> i.setOnAction(e -> {
             if (((CheckMenuItem) i).isSelected()) {
@@ -131,7 +131,7 @@ public class FilterDialogController {
             setAuthorsBtnText();
         }));
 
-        GridPane.setConstraints(authorsButton, 0, types.size() / 3 + 3);
+        GridPane.setConstraints(authorsButton, 0, types.size() / 3 + 3, 2, 1);
     }
 
     /**

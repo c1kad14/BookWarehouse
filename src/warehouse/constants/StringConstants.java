@@ -21,7 +21,7 @@ public class StringConstants {
     public static final String PUBLISHER_FIELD = "Publisher";
     public static final String AUTHOR_FIELD = "Author";
     public static final String TYPE_FIELD = "Type";
-    public static final String DESCRIPTION_FIELD = "Description";
+    public static final String NOTES_FIELD = "Notes";
     public static final String PATH_FIELD = "Path";
     public static final String EMPTY_STRING = "";
 

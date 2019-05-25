@@ -43,7 +43,7 @@ public class SearchController implements FilterListener {
     @FXML
     public void addBtnClick(ActionEvent event) throws IOException {
         Parent dialog = FXMLLoader.load(getClass().getResource("../ui/addBookDialog.fxml"));
-        Scene scene = new Scene(dialog, 400, 400);
+        Scene scene = new Scene(dialog, 400, 475);
         Stage stage = new Stage();
         stage.setTitle("Add new book");
         stage.initModality(Modality.APPLICATION_MODAL);

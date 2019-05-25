@@ -34,7 +34,9 @@ public class AddBookDialogController {
     public Button selectFileBtn;
     public Button addBtn;
     public Label selectedFileLabel;
-    public TextArea descTextBox;
+    public TextArea notesTextBox;
+    public TextField yearTextBox;
+    public TextField publisherTextBox;
     private FileChooser fileChooser;
     private SQLiteClient client;
     private List<Type> types;
@@ -69,6 +71,8 @@ public class AddBookDialogController {
 
     public void addBtnClick(ActionEvent actionEvent) {
         try {
+            addBtn.setDisable(true);
+
             File file = new File(selectedPath);
             File bookDirectory = new File(BOOK_WAREHOUSE_FOLDER + "//" + System.currentTimeMillis());
             bookDirectory.mkdirs();
@@ -77,7 +81,9 @@ public class AddBookDialogController {
 
             Book book = new Book();
             book.setTitle(titleTextBox.getText());
-            book.setNotes(descTextBox.getText());
+            book.setNotes(notesTextBox.getText());
+            book.setPublisher(publisherTextBox.getText());
+            book.setYear(yearTextBox.getText());
             book.setType(types.stream().filter(g -> g.getName().equals(typesComboBox.getSelectionModel().getSelectedItem().toString())).findFirst().get());
             book.setAuthor(authors.stream().filter(a -> a.toString().equals(authorsComboBox.getSelectionModel().getSelectedItem().toString())).findFirst().get());
             book.setPath(bookDirectory.getPath() + "//" + file.getName());
@@ -112,6 +118,11 @@ public class AddBookDialogController {
         typesComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> shouldAddButtonBeEnabled());
         authorsComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> shouldAddButtonBeEnabled());
         titleTextBox.textProperty().addListener((observable, oldValue, newValue) -> shouldAddButtonBeEnabled());
+        yearTextBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                yearTextBox.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
     }
 
     private void close() {

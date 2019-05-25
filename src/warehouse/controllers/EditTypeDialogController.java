@@ -32,9 +32,7 @@ public class EditTypeDialogController {
 
     public void saveBtnClick(ActionEvent actionEvent) {
         type.setName(typeTextBox.getText());
-        Type result = client.updateType(type);
-
-        System.out.println(result);
+        client.updateType(type);
 
         close();
     }

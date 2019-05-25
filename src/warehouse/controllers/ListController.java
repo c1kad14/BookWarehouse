@@ -34,7 +34,7 @@ public class ListController implements BookListener {
     public TableColumn titleColumn;
     public TableColumn authorColumn;
     public TableColumn typeColumn;
-    public TableColumn descColumn;
+    public TableColumn notesColumn;
     public TableColumn actionColumn;
     public TableColumn yearColumn;
     public TableColumn publisherColumn;
@@ -54,7 +54,7 @@ public class ListController implements BookListener {
         authorColumn.setCellValueFactory(new PropertyValueFactory<>(AUTHOR_FIELD));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>(TITLE_FIELD));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>(TYPE_FIELD));
-        descColumn.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION_FIELD));
+        notesColumn.setCellValueFactory(new PropertyValueFactory<>(NOTES_FIELD));
         yearColumn.setCellValueFactory(new PropertyValueFactory<>(YEAR_FIELD));
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>(PUBLISHER_FIELD));
         actionColumn.setCellFactory(initActionButton());

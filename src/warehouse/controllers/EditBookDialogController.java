@@ -1,5 +1,7 @@
 package warehouse.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +29,7 @@ public class EditBookDialogController {
     public ComboBox typesComboBox;
     public TextField idTextBox;
     public TextField titleTextBox;
-    public TextArea descTextBox;
+    public TextArea notesTextBox;
     public Button saveBtn;
     public Button closeBtn;
     public Label selectedFileLabel;
@@ -50,7 +52,11 @@ public class EditBookDialogController {
 
         fileChooser = new FileChooser();
         titleTextBox.textProperty().addListener((observable, oldValue, newValue) -> shouldSaveButtonBeEnabled());
-
+        yearTextBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                yearTextBox.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
         typesComboBox.setItems(FXCollections.observableArrayList(types));
         authorsComboBox.setItems(FXCollections.observableArrayList(authors));
 
@@ -63,7 +69,7 @@ public class EditBookDialogController {
         this.titleTextBox.setText(this.book.getTitle());
         this.selectedPath = this.book.getPath();
         this.selectedFileLabel.setText(new File(this.book.getPath()).getName());
-        this.descTextBox.setText(this.book.getNotes());
+        this.notesTextBox.setText(this.book.getNotes());
         this.publisherTextBox.setText(this.book.getPublisher());
         this.yearTextBox.setText(this.book.getYear());
         this.authorsComboBox.getSelectionModel().select(authors.stream().filter(a -> a.getId() == this.book.getAuthor().getId()).findFirst().get());
@@ -71,6 +77,7 @@ public class EditBookDialogController {
     }
 
     public void saveBtnClick(ActionEvent actionEvent) {
+        saveBtn.setDisable(true);
         try {
             if(!this.book.getPath().equals(selectedPath)) {
                 //delete old directory
@@ -85,7 +92,7 @@ public class EditBookDialogController {
             }
 
             this.book.setTitle(this.titleTextBox.getText());
-            this.book.setNotes(this.descTextBox.getText());
+            this.book.setNotes(this.notesTextBox.getText());
             this.book.setPublisher(this.publisherTextBox.getText());
             this.book.setYear(this.yearTextBox.getText());
             this.book.setType(this.types.stream().filter(g ->

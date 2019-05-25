@@ -70,13 +70,11 @@ public class EditAuthorsListDialogController {
                             Author author = getTableView().getItems().get(getIndex());
 
                             //Call edit dialog open
-                            boolean result = false;
                             try {
-                                result = client.deleteAuthor(author);
+                                client.deleteAuthor(author);
                             } catch (MalformedURLException e) {
                                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                             }
-                            System.out.println(result);
 
                             authorList = FXCollections.observableArrayList(client.getAuthors());
                             authorsView.setItems(authorList);

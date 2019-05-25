@@ -39,7 +39,7 @@ public class EditBooksListDialogController {
     public TableColumn editColumn;
     public TableColumn deleteColumn;
     public Button closeBtn;
-    public TableColumn descColumn;
+    public TableColumn notesColumn;
     private SQLiteClient client;
     private ObservableList<Book> booksList;
 
@@ -52,7 +52,7 @@ public class EditBooksListDialogController {
         titleColumn.setCellValueFactory(new PropertyValueFactory<>(TITLE_FIELD));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>(AUTHOR_FIELD));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>(TYPE_FIELD));
-        descColumn.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION_FIELD));
+        notesColumn.setCellValueFactory(new PropertyValueFactory<>(NOTES_FIELD));
         editColumn.setCellFactory(getEditButton());
         deleteColumn.setCellFactory(getDeleteButton());
 
@@ -128,7 +128,7 @@ public class EditBooksListDialogController {
                             EditBookDialogController editBookDialogController = bookDialogLoader.getController();
                             editBookDialogController.setBook(book);
 
-                            Scene scene = new Scene(editBookDialog, 372, 624);
+                            Scene scene = new Scene(editBookDialog, 372, 600);
                             Stage stage = new Stage();
 
                             stage.setTitle("Edit book");
