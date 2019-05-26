@@ -370,7 +370,7 @@ public class SQLiteClient {
     }
 
     private void openNotification() throws MalformedURLException {
-        FXMLLoader notificationDialogLoader = new FXMLLoader(getClass().getResource("../ui/notificationDialog.fxml"));
+        FXMLLoader notificationDialogLoader = new FXMLLoader(getClass().getResource("/ui/notificationDialog.fxml"));
         Parent notificationDialog = null;
         try {
             notificationDialog = notificationDialogLoader.load();

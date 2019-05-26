@@ -118,7 +118,7 @@ public class EditBooksListDialogController {
                         btn.setOnAction((ActionEvent event) -> {
                             Book book = getTableView().getItems().get(getIndex());
 
-                            FXMLLoader bookDialogLoader = new FXMLLoader(getClass().getResource("../ui/editBookDialog.fxml"));
+                            FXMLLoader bookDialogLoader = new FXMLLoader(getClass().getResource("/ui/editBookDialog.fxml"));
                             Parent editBookDialog = null;
                             try {
                                 editBookDialog = bookDialogLoader.load();

@@ -33,7 +33,7 @@ public class MenuController {
     public void addAuthorMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
-            dialog = FXMLLoader.load(getClass().getResource("../ui/addAuthorDialog.fxml"));
+            dialog = FXMLLoader.load(getClass().getResource("/ui/addAuthorDialog.fxml"));
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
@@ -50,7 +50,7 @@ public class MenuController {
     public void addBookMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
-            dialog = FXMLLoader.load(getClass().getResource("../ui/addBookDialog.fxml"));
+            dialog = FXMLLoader.load(getClass().getResource("/ui/addBookDialog.fxml"));
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
@@ -69,7 +69,7 @@ public class MenuController {
     public void addTypeMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
-            dialog = FXMLLoader.load(getClass().getResource("../ui/addTypeDialog.fxml"));
+            dialog = FXMLLoader.load(getClass().getResource("/ui/addTypeDialog.fxml"));
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
@@ -86,7 +86,7 @@ public class MenuController {
     public void editAuthorsMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
-            dialog = FXMLLoader.load(getClass().getResource("../ui/editAuthorsListDialog.fxml"));
+            dialog = FXMLLoader.load(getClass().getResource("/ui/editAuthorsListDialog.fxml"));
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
@@ -106,7 +106,7 @@ public class MenuController {
     public void editTypesMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
-            dialog = FXMLLoader.load(getClass().getResource("../ui/editTypesListDialog.fxml"));
+            dialog = FXMLLoader.load(getClass().getResource("/ui/editTypesListDialog.fxml"));
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
@@ -125,7 +125,7 @@ public class MenuController {
     public void editBooksMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
-            dialog = FXMLLoader.load(getClass().getResource("../ui/editBooksListDialog.fxml"));
+            dialog = FXMLLoader.load(getClass().getResource("/ui/editBooksListDialog.fxml"));
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
@@ -144,7 +144,7 @@ public class MenuController {
     public void aboutMenuItemClick(ActionEvent actionEvent) throws MalformedURLException {
         Parent dialog = null;
         try {
-            dialog = FXMLLoader.load(getClass().getResource("../ui/about.fxml"));
+            dialog = FXMLLoader.load(getClass().getResource("/ui/about.fxml"));
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }

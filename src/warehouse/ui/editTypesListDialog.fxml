@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-
 <AnchorPane prefHeight="375.0" prefWidth="541.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.controllers.EditTypesListDialogController">
     <children>
         <TableView fx:id="typesView" layoutX="21.0" layoutY="31.0" prefHeight="279.0" prefWidth="500.0">

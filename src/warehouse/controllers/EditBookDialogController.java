@@ -17,6 +17,7 @@ import warehouse.models.Type;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 import static warehouse.constants.StringConstants.BOOK_WAREHOUSE_FOLDER;
 import static warehouse.constants.StringConstants.SELECT_FILE_LABEL_TEXT;
@@ -88,7 +89,7 @@ public class EditBookDialogController {
                 File bookDirectory = new File(BOOK_WAREHOUSE_FOLDER + "//" + System.currentTimeMillis());
                 bookDirectory.mkdirs();
                 FileUtils.copyFileToDirectory(file, bookDirectory);
-                this.book.setPath(bookDirectory.getPath() + "//" + file.getName());
+                this.book.setPath(bookDirectory.toURI().relativize(new File(BOOK_WAREHOUSE_FOLDER).toURI()).getPath() + "//" + file.getName());
             }
 
             this.book.setTitle(this.titleTextBox.getText());
@@ -126,7 +127,11 @@ public class EditBookDialogController {
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
             selectedFileLabel.setText(file.getName());
-            selectedPath = file.getAbsolutePath();
+            try {
+                selectedPath = file.getCanonicalPath();
+            } catch (IOException e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            }
         }
         shouldSaveButtonBeEnabled();
     }

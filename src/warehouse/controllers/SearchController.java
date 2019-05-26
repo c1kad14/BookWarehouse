@@ -42,7 +42,7 @@ public class SearchController implements FilterListener {
 
     @FXML
     public void addBtnClick(ActionEvent event) throws IOException {
-        Parent dialog = FXMLLoader.load(getClass().getResource("../ui/addBookDialog.fxml"));
+        Parent dialog = FXMLLoader.load(getClass().getResource("/ui/addBookDialog.fxml"));
         Scene scene = new Scene(dialog, 400, 475);
         Stage stage = new Stage();
         stage.setTitle("Add new book");
@@ -55,7 +55,7 @@ public class SearchController implements FilterListener {
     }
 
     public void filterBtnClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader filterLoader = new FXMLLoader(getClass().getResource("../ui/filterDialog.fxml"));
+        FXMLLoader filterLoader = new FXMLLoader(getClass().getResource("/ui/filterDialog.fxml"));
         Parent filterDialog = filterLoader.load();
         FilterDialogController filterDialogController = filterLoader.getController();
 
