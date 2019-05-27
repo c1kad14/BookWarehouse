@@ -89,7 +89,7 @@ public class EditBookDialogController {
                 File bookDirectory = new File(BOOK_WAREHOUSE_FOLDER + "//" + System.currentTimeMillis());
                 bookDirectory.mkdirs();
                 FileUtils.copyFileToDirectory(file, bookDirectory);
-                this.book.setPath(bookDirectory.toURI().relativize(new File(BOOK_WAREHOUSE_FOLDER).toURI()).getPath() + "//" + file.getName());
+                this.book.setPath(new File(new File(BOOK_WAREHOUSE_FOLDER).getParent()).toPath().relativize(bookDirectory.toPath()) + "\\" + file.getName());
             }
 
             this.book.setTitle(this.titleTextBox.getText());

@@ -90,7 +90,7 @@ public class AddBookDialogController {
             book.setYear(yearTextBox.getText());
             book.setType(types.stream().filter(g -> g.getName().equals(typesComboBox.getSelectionModel().getSelectedItem().toString())).findFirst().get());
             book.setAuthor(authors.stream().filter(a -> a.toString().equals(authorsComboBox.getSelectionModel().getSelectedItem().toString())).findFirst().get());
-            book.setPath(bookDirectory.toURI().relativize(new File(BOOK_WAREHOUSE_FOLDER).toURI()).getPath() + "//" + file.getName());
+            book.setPath(new File(new File(BOOK_WAREHOUSE_FOLDER).getParent()).toPath().relativize(bookDirectory.toPath()) + "\\" + file.getName());
 
             client.addBook(book);
         } catch (IOException e) {

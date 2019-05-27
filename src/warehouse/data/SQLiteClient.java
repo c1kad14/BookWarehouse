@@ -84,7 +84,6 @@ public class SQLiteClient {
             connection.close();
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            return null;
         }
 
         return types;
@@ -162,7 +161,6 @@ public class SQLiteClient {
             connection.close();
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            return null;
         }
 
         return books;
